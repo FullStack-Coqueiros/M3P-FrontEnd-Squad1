@@ -1,5 +1,5 @@
-import { Sidebar } from '../components/OthersComponents/Sidebar/Sidebar.jsx';
-import { Toolbar } from '../components/OthersComponents/Toolbar/Toolbar.jsx';
+import { Sidebar } from '../Components/OthersComponents/Sidebar/Sidebar.jsx';
+import { Toolbar } from '../Components/OthersComponents/Toolbar/Toolbar.jsx';
 import { Outlet } from "react-router-dom";
 
 export const AppLayout = () => {
