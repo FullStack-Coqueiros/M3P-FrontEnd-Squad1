@@ -7,7 +7,7 @@ export const AppLayout = () => {
     <div className="App">
 
         <div className="SidebarBox">
-            <Sidebar/> // Fazer importação do Menu
+            <Sidebar/>
         </div>
 
         <div className="Main">
