@@ -5,7 +5,7 @@ export const Toolbar = () => {
         <div className="container">
 
         <div className="txtheader">titulo</div>
-        
+
         <div className="userheader">
             <div className="txtuser">nome usuario</div>
             <img src="" alt="" />
@@ -13,5 +13,5 @@ export const Toolbar = () => {
         </div>
 
         </div>
-        )
+          )
 }
