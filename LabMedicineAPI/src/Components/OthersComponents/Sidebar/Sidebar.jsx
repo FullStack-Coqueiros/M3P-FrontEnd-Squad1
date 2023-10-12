@@ -2,7 +2,17 @@ import React from 'react'
 
 export const Sidebar = () => {
     return (
-        <div>Sidebar</div>
-    )
+        <>      
+        <div className="labelswitch">MENU</div>
+
+        <div className="switchbtn">
+        
+        </div>
+
+        </>
+      )
 }
+
+
+
 
