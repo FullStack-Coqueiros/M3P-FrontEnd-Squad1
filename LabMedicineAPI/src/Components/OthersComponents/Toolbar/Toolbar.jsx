@@ -1,17 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContext.jsx';
+import { HeaderContext } from '../../../context/HeaderContext.jsx';
 
-export const Toolbar = () => {
+function Toolbar() {
+    const { data } = useContext(HeaderContext);
+    const { auth } = useContext(AuthContext);
+    
     return (
         <div className="container">
 
-        <div className="txtheader">titulo</div>
+            <h3 className="txtheader" id="titulo">{data.titulo}</h3>
+            
 
-        <div className="userheader">
-            <div className="txtuser">nome usuario</div>
-            <img src="" alt="" />
+            <div className="userheader">
+                <h6 className="txtuser">{auth.user.name}</h6>
+                <img src="" alt="ícone do usuário" />{""}
+
+            </div>
 
         </div>
-
-        </div>
-          )
+    )
 }
+export default Toolbar;
