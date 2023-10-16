@@ -5,12 +5,6 @@
       "name": "Admin",
       "email": "admin@admin.com",
       "password": "12345678"
-    },
-    {
-      "id": 2,
-      "name": "William Rocha",
-      "email": "will@will.com",
-      "password": "12345678"
     }
   ],
   "usuarios": [],
