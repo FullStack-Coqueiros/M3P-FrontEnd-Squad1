@@ -2,7 +2,7 @@ import { createContext, useState } from "react";
 import PropTypes from "prop-types";
 
 export const HeaderContext = createContext({
-  data: {
+  dataCard: {
     titulo: "",
   },
   setData: () => {},
