@@ -1,4 +1,4 @@
-import CardEstatistica from './CardEstatistica.jsx';
+import CardEstatistica from '../CardEstatistica.jsx';
 import * as Styled from './InfoSistema.Style.jsx';
 import React, { useState, useEffect } from 'react';
 import { ImUsers, ImAidKit, ImFolderPlus } from 'react-icons/im';
