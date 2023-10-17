@@ -1,23 +1,25 @@
 import { LoginComponent } from '../../Components/LoginComponents/LoginComponent.jsx';
 import ImgLogin from '../../assets/imglogin.svg';
+import * as Styled from './LoginPage.Style.jsx';
 
 export const LoginPage = () => {
     return (
         <>
         
-        <div className="ContainerLogin">
-            <img className="ImageLogin" src={ImgLogin} alt="Imagem Login" />
-            <div className="BarraCentral"></div>
+        <Styled.ContainerLogin>
+            <Styled.ImageLogin src={ImgLogin} alt="Imagem Login" />
 
-            <div className="DivCriarConta">
-                <div className="LabelCriarConta" >Não possui uma conta?</div>
-                <button className='ButtonHeaderLogin'onClick={() => alert('Em breve você poderá criar sua conta...')}>Criar Conta</button>
-            </div>
+            <Styled.BarraCentral/>
 
-            <div className="Login">
+            <Styled.DivCriarConta>
+                <Styled.LabelCriarConta >Não possui uma conta?</Styled.LabelCriarConta>
+                <Styled.ButtonHeaderLogin onClick={() => alert('Em breve você poderá criar sua conta...')}>Criar Conta</Styled.ButtonHeaderLogin>
+            </Styled.DivCriarConta>
+
+            <Styled.Login>
                 <LoginComponent/>
-            </div>
-        </div>
+            </Styled.Login>
+        </Styled.ContainerLogin>
         </>
     );
 }
