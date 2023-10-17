@@ -1,4 +1,4 @@
-import * as Styled from './CardEstatistica.Style';
+import * as Styled from './CardEstatistica.Style.jsx';
 import LabLogo from '../../assets/LabLogo.png';
 
 function CardEstatistica ({dataCard}) {
