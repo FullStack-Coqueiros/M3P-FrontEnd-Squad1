@@ -1,8 +1,20 @@
+import { useState } from 'react';
 import { LoginComponent } from '../../Components/LoginComponents/LoginComponent.jsx';
 import ImgLogin from '../../assets/imglogin.svg';
 import * as Styled from './LoginPage.Style.jsx';
+import { ModalComponent } from '../../Components/LoginComponents/Modal/ModalComponent.jsx';
 
 export const LoginPage = () => {
+    const [modalOpen, setModalOpen] = useState(false);
+
+    const handleCreateAccountClick = () => {
+        setModalOpen(true);
+    };
+
+    const handleModalClose = () => {
+        setModalOpen(false);
+    };
+
     return (
         <>
         
@@ -13,12 +25,14 @@ export const LoginPage = () => {
 
             <Styled.DivCriarConta>
                 <Styled.LabelCriarConta >Não possui uma conta?</Styled.LabelCriarConta>
-                <Styled.ButtonHeaderLogin onClick={() => alert('Em breve você poderá criar sua conta...')}>Criar Conta</Styled.ButtonHeaderLogin>
+                <Styled.ButtonHeaderLogin onClick={handleCreateAccountClick}>Criar Conta</Styled.ButtonHeaderLogin>
             </Styled.DivCriarConta>
 
             <Styled.Login>
                 <LoginComponent/>
             </Styled.Login>
+
+            {modalOpen && <ModalComponent onClose={handleModalClose}/>}
         </Styled.ContainerLogin>
         </>
     );
