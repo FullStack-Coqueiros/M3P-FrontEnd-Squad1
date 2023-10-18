@@ -1,24 +1,25 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../../context/AuthContext.jsx';
 import { HeaderContext } from '../../../context/HeaderContext.jsx';
+import * as Styled from './Toolbar.style.jsx';
+import UserPng from '../../../assets/user.png';
 
 function Toolbar() {
     const { data } = useContext(HeaderContext);
     const { auth } = useContext(AuthContext);
     
     return (
-        <div className="container">
+        <Styled.Container>
+        <Styled.TxtHeader id="titulo">{data.titulo}</Styled.TxtHeader>
 
-            <h3 className="txtheader" id="titulo">{data.titulo}</h3>
-            
-
-            <div className="userheader">
-                <h6 className="txtuser">{auth.user.name}</h6>
-                <img src="" alt="ícone do usuário" />{""}
-
-            </div>
-
-        </div>
+        <Styled.UserHeader>
+            <Styled.TxtUser>{auth.user.name}</Styled.TxtUser>
+            <img
+            alt="Imagem do usuário"
+            src={UserPng}
+            />{" "}
+        </Styled.UserHeader>
+        </Styled.Container>
     )
 }
 export default Toolbar;
