@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import * as Styled from './InputPage.Style.jsx';
 import { useForm } from 'react-hook-form';
 import { PacienteService } from '../../../services/Paciente.service.jsx';
-import { CardPaciente } from '../CardPaciente/CardPaciente.jsx';
+import CardPaciente from '../CardPaciente/CardPaciente.jsx';
 
 export const InputPage = () => {
     const {
