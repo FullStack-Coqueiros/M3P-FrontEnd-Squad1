@@ -1,25 +1,25 @@
-import { Sidebar } from '../Components/OthersComponents/Sidebar/Sidebar.jsx';
-import Toolbar from '../Components/OthersComponents/Toolbar/Toolbar.jsx';
 import { Outlet } from "react-router-dom";
+import * as Styled from "./AppLayout.style.jsx";
+import { Sidebar } from "../Components/OthersComponents/Sidebar/SideBar.jsx";
+import Toolbar from "../Components/OthersComponents/Toolbar/Toolbar.jsx";
 
-export const AppLayout = () => {
-  return (
-    <div className="App">
-
-        <div className="SidebarBox">
-            <Sidebar/>
-        </div>
-
-        <div className="Main">
-            <div className="Header">
-                <Toolbar/>
-            </div>
-
-            <div className="Content">
-                <Outlet/>
-            </div>
-
-        </div>
-    </div>
-  )
-}
+export const Layout = () => {
+  const render = () => {
+    return (
+      <Styled.App>
+        <Styled.SidebarBox>
+          <Sidebar />
+        </Styled.SidebarBox>
+        <Styled.Main>
+          <Styled.Header>
+            <Toolbar />
+          </Styled.Header>
+          <Styled.Content>
+            <Outlet />
+          </Styled.Content>
+        </Styled.Main>
+      </Styled.App>
+    );
+  };
+  return render();
+};
