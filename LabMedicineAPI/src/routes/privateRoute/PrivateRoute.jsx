@@ -1,11 +1,13 @@
 import React from "react";
 import { Route, Navigate } from 'react-router-dom';
 import AuthService from '../../services/Auth.Service.jsx';
+import CadastroUsuarioPage from "../../pages/cadastros/usuarios/CadastroUsuariosPage.jsx";
+
 
 const PrivateRoute = ({ element: Element, ...rest }) => {
     const isAuthorized = AuthService.isAuthenticated();
 
-    return isAuthorized ? <Route {...rest} element={<Element />} /> : <Navigate to="/sem-permissao" />;
+    return isAuthorized ? <Element {...rest} /> : <Navigate to="/sem-permissao" />;
 };
 
 export default PrivateRoute;
