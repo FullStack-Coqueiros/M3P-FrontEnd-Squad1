@@ -1,18 +1,11 @@
-import React, { Component } from "react";
-import { Route, Redirect } from 'react-router-dom';
-import AuthService from '../../services/Auth.Service';
+import React from "react";
+import { Route, Navigate } from 'react-router-dom';
+import AuthService from '../../services/Auth.Service.jsx';
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-        {...rest}
-        render={(props) => 
-        AuthService.isAdministrator() ? (
-            <Component {...props} />
-        ) : (
-            <Redirect to='/sem-permissao'/>
-        )
-        }
-    />
-);
+const PrivateRoute = ({ element: Element, ...rest }) => {
+    const isAuthorized = AuthService.isAuthenticated();
+
+    return isAuthorized ? <Route {...rest} element={<Element />} /> : <Navigate to="/sem-permissao" />;
+};
 
 export default PrivateRoute;

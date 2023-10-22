@@ -40,7 +40,7 @@ const AuthService = {
     },
 };
 
-const isTokenExpird = (token) => {
+const isTokenExpired = (token) => {
     const decodedToken = decodeToken(token);
 
     if(!decodedToken || !decodedToken.exp) {

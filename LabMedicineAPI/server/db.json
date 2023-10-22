@@ -4,11 +4,20 @@
       "id": 1,
       "name": "Admin",
       "email": "admin@admin.com",
-      "password": "12345678"
+      "password": "12345678",
+      "roles": ["Administrador"]
     }
   ],
   "usuarios": [],
-  "administradores": [],
+  "administradores": [
+    {
+      "id": 2,
+      "username": "Admin",
+      "email": "admin@admin.com",
+      "password": "12345678",
+      "roles": ["Administrador"]
+    }
+  ],
   "pacientes": [],
   "enfermeiros": [],
   "medicos": [],
