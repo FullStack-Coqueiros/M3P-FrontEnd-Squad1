@@ -6,6 +6,16 @@
       "email": "admin@admin.com",
       "password": "12345678",
       "tipo": "administrador"
+    },
+    {
+      "name": "William Dias Rocha",
+      "genero": "masculino",
+      "cpf": "011.920.560-27",
+      "telefone": "(48) 9 8853-5179",
+      "email": "admin1@admin.com",
+      "password": "12345678",
+      "tipo": "administrador",
+      "id": 3
     }
   ],
   "usuarios": [],

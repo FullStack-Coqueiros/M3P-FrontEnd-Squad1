@@ -5,34 +5,32 @@ import AuthService from "../../../services/Auth.Service.jsx";
 import { useAuth } from "../../../context/AuthContext.jsx";
 
 const CadastroUsuarioPage = () => {
-
-    const { auth } = useAuth();
-    const navigate = useNavigate();
-
     const [dadosUsuario, setDadosUsuario] = useState({
-        nomeCompleto: '',
+        name: '',
         genero: '',
         cpf: '',
         telefone: '',
         email: '',
-        senha: '',
+        password: '',
         tipo: '',
     });
 
     const [errosValidacao, setErrosValidacao] = useState({});
     const [statusCadastro, setStatusCadastro] = useState('');
+    const [dirty, setDirty] = useState({});
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setDadosUsuario((dadosAntigos) => ({...dadosAntigos, [name]: value }));
+        setDadosUsuario((dadosAntigos) => ({ ...dadosAntigos, [name]: value }));
+        setDirty((prevDirty) => ({ ...prevDirty, [name]: true }));
     };
 
     const validarCampos = () => {
         const erros = {};
 
         // validação do nome completo
-        if (!dadosUsuario.nomeCompleto || dadosUsuario.nomeCompleto.length < 8 || dadosUsuario.nomeCompleto.length > 64) {
-            erros.nomeCompleto = 'Nome completo é obrigatório e deve ter entre 8 e 64 caracteres.';
+        if (!dadosUsuario.name || dadosUsuario.name.length < 8 || dadosUsuario.name.length > 64) {
+            erros.name = 'Nome completo é obrigatório e deve ter entre 8 e 64 caracteres.';
         }
 
         // validação do email
@@ -54,8 +52,8 @@ const CadastroUsuarioPage = () => {
         }
 
         // validação da senha
-        if (!dadosUsuario.senha || dadosUsuario.senha.length < 6) {
-            erros.senha = 'Senha é obrigatória e deve ter pelo menos 6 caracteres.';
+        if (!dadosUsuario.password || dadosUsuario.password.length < 6) {
+            erros.password = 'Senha é obrigatória e deve ter pelo menos 6 caracteres.';
         }
 
         // validação do tipo
@@ -75,11 +73,6 @@ const CadastroUsuarioPage = () => {
         }
 
         try {
-            if (!AuthService.isAdministrator()) {
-                navigate('/sem-permissao');
-                return;
-            }
-
             await UserService.CreateUser(dadosUsuario);
             setStatusCadastro('sucesso');
             setErrosValidacao({});
@@ -95,114 +88,115 @@ const CadastroUsuarioPage = () => {
             <h2>Cadastro de Usuário</h2>
 
             <div className="InputWrapper">
-                <label htmlFor="nomeCompleto">Nome Completo:</label>
-                <input 
-                type="text" 
-                id="nomeCompleto"
-                name="nomeCompleto"
-                value={dadosUsuario.nomeCompleto}
-                onChange={handleChange}
+                <label htmlFor="name">Nome Completo:</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={dadosUsuario.name}
+                    onChange={handleChange}
                 />
-                {errosValidacao.nomeCompleto && (
-                    <ErrorMessage>{errosValidacao.nomeCompleto}</ErrorMessage>
+                {dirty.name && errosValidacao.name && (
+                    <p className="error-message">{errosValidacao.name}</p>
                 )}
             </div>
 
             <div className="InputWrapper">
                 <label htmlFor="genero">Genero:</label>
-                <select 
-                name="genero" 
-                id="genero"
-                value={dadosUsuario.genero}
-                onChange={handleChange}
+                <select
+                    name="genero"
+                    id="genero"
+                    value={dadosUsuario.genero}
+                    onChange={handleChange}
                 >
                     <option value="">Selecione</option>
                     <option value="masculino">Masculino</option>
                     <option value="feminino">Feminino</option>
                     <option value="não declarar">Não Declarar</option>
                 </select>
-                {errosValidacao.genero && (
-                    <ErrorMessage>{errosValidacao.genero}</ErrorMessage>
+                {dirty.genero && errosValidacao.genero && (
+                    <p className="error-message">{errosValidacao.genero}</p>
                 )}
             </div>
+
             <div className="InputWrapper">
-                    <label htmlFor="cpf">CPF:</label>
-                    <input 
+                <label htmlFor="cpf">CPF:</label>
+                <input
                     type="text"
-                    id="cpf" 
+                    id="cpf"
                     name="cpf"
                     value={dadosUsuario.cpf}
                     onChange={handleChange}
-                    />
-                    {errosValidacao.cpf && (
-                        <ErrorMessage>{errosValidacao.cpf}</ErrorMessage>
-                    )}
-                </div>
+                />
+                {dirty.cpf && errosValidacao.cpf && (
+                    <p className="error-message">{errosValidacao.cpf}</p>
+                )}
+            </div>
 
-                <div className="InputWrapper">
-                    <label htmlFor="telefone">Telefone:</label>
-                    <input 
-                    type="text" 
+            <div className="InputWrapper">
+                <label htmlFor="telefone">Telefone:</label>
+                <input
+                    type="text"
                     id="telefone"
                     name="telefone"
                     value={dadosUsuario.telefone}
                     onChange={handleChange}
-                    />
-                    {errosValidacao.telefone && (
-                        <ErrorMessage>{errosValidacao.telefone}</ErrorMessage>
-                    )}
-                </div>
+                />
+                {dirty.telefone && errosValidacao.telefone && (
+                    <p className="error-message">{errosValidacao.telefone}</p>
+                )}
+            </div>
 
-                <div className="InputWrapper">
-                    <label htmlFor="email">E-mail:</label>
-                    <input 
-                    type="text" 
+            <div className="InputWrapper">
+                <label htmlFor="email">E-mail:</label>
+                <input
+                    type="text"
                     id="email"
                     name="email"
                     value={dadosUsuario.email}
                     onChange={handleChange}
-                    />
-                    {errosValidacao.email && (
-                        <ErrorMessage>{errosValidacao.email}</ErrorMessage>
-                    )}
-                </div>
+                />
+                {dirty.email && errosValidacao.email && (
+                    <p className="error-message">{errosValidacao.email}</p>
+                )}
+            </div>
 
-                <div className="InputWrapper">
-                    <label htmlFor="senha">Senha:</label>
-                    <input 
-                    type="password" 
-                    id="senha"
-                    name="senha"
-                    value={dadosUsuario.senha}
-                    onChange={handleChange}                    
-                    />
-                    {errosValidacao.senha && (
-                        <ErrorMessage>{errosValidacao.senha}</ErrorMessage>
-                    )}
-                </div>
+            <div className="InputWrapper">
+                <label htmlFor="password">Senha:</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    value={dadosUsuario.password}
+                    onChange={handleChange}
+                />
+                {dirty.password && errosValidacao.password && (
+                    <p className="error-message">{errosValidacao.password}</p>
+                )}
+            </div>
 
-                <div className="InputWrapper">
-                    <label htmlFor="tipo">Tipo:</label>
-                    <select 
-                    name="tipo" 
+            <div className="InputWrapper">
+                <label htmlFor="tipo">Tipo:</label>
+                <select
+                    name="tipo"
                     id="tipo"
                     value={dadosUsuario.tipo}
                     onChange={handleChange}
-                    >
-                        <option value="">Selecione</option>
-                        <option value="administrador">Administrador</option>
-                        <option value="medico">Médico</option>
-                        <option value="enfermeiro">Enfermeiro</option>
-                    </select>
-                    {errosValidacao.tipo && (
-                        <ErrorMessage>{errosValidacao.tipo}</ErrorMessage>
-                    )}
-                </div>
+                >
+                    <option value="">Selecione</option>
+                    <option value="administrador">Administrador</option>
+                    <option value="medico">Médico</option>
+                    <option value="enfermeiro">Enfermeiro</option>
+                </select>
+                {dirty.tipo && errosValidacao.tipo && (
+                    <p className="error-message">{errosValidacao.tipo}</p>
+                )}
+            </div>
 
-                <button onClick={handleCadastroClick}>Cadastrar</button>
+            <button onClick={handleCadastroClick}>Cadastrar</button>
 
-                {statusCadastro === 'sucesso' && <p>Cadastrado com sucesso.</p>}
-                {statusCadastro === 'falha' && <p>Falha ao cadastrar.</p>}
+            {statusCadastro === 'sucesso' && <p>Cadastrado com sucesso.</p>}
+            {statusCadastro === 'falha' && <p>Falha ao cadastrar.</p>}
         </div>
     );
 };
