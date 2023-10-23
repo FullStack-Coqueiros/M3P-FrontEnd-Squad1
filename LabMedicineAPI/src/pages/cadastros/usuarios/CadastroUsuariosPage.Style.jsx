@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
 export const ContainerCadastroUsuario = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
+  display: row;
+  width: 900px;
+  height: auto;
+  margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -41,6 +43,12 @@ export const ButtonCadastro = styled.button`
   border-radius: 4px;
   cursor: pointer;
   font-size: 16px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: auto; // Adicionado para centralizar na horizontal
 
   &:hover {
     background-color: #45a049;

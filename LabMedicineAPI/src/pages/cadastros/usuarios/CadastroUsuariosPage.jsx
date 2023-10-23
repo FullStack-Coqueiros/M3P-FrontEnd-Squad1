@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserService } from '../../../services/User.Service.jsx';
 import { AuthContext } from "../../../context/AuthContext.jsx";
 import { HeaderContext } from "../../../context/HeaderContext.jsx";
+import * as Styled from './CadastroUsuariosPage.Style.jsx';
 
 const CadastroUsuarioPage = () => {
 
@@ -15,7 +16,7 @@ const CadastroUsuarioPage = () => {
     useEffect
     
     
-    const { auth } = useContext(AuthContext);
+    const { auth } = useContext(AuthContext)
     
 
     const [dadosUsuario, setDadosUsuario] = useState({
@@ -97,10 +98,10 @@ const CadastroUsuarioPage = () => {
     };
 
     return (
-        <div className="ContainerCadastroUsuario">
+        <Styled.ContainerCadastroUsuario>
             <h2>Cadastro de Usuário</h2>
 
-            <div className="InputWrapper">
+            <Styled.InputWrapper>
                 <label htmlFor="name">Nome Completo:</label>
                 <input
                     type="text"
@@ -112,9 +113,9 @@ const CadastroUsuarioPage = () => {
                 {dirty.name && errosValidacao.name && (
                     <p className="error-message">{errosValidacao.name}</p>
                 )}
-            </div>
+            </Styled.InputWrapper>
 
-            <div className="InputWrapper">
+            <Styled.InputWrapper>
                 <label htmlFor="genero">Genero:</label>
                 <select
                     name="genero"
@@ -130,9 +131,9 @@ const CadastroUsuarioPage = () => {
                 {dirty.genero && errosValidacao.genero && (
                     <p className="error-message">{errosValidacao.genero}</p>
                 )}
-            </div>
+            </Styled.InputWrapper>
 
-            <div className="InputWrapper">
+            <Styled.InputWrapper>
                 <label htmlFor="cpf">CPF:</label>
                 <input
                     type="text"
@@ -144,9 +145,9 @@ const CadastroUsuarioPage = () => {
                 {dirty.cpf && errosValidacao.cpf && (
                     <p className="error-message">{errosValidacao.cpf}</p>
                 )}
-            </div>
+            </Styled.InputWrapper>
 
-            <div className="InputWrapper">
+            <Styled.InputWrapper>
                 <label htmlFor="telefone">Telefone:</label>
                 <input
                     type="text"
@@ -158,9 +159,9 @@ const CadastroUsuarioPage = () => {
                 {dirty.telefone && errosValidacao.telefone && (
                     <p className="error-message">{errosValidacao.telefone}</p>
                 )}
-            </div>
+            </Styled.InputWrapper>
 
-            <div className="InputWrapper">
+            <Styled.InputWrapper>
                 <label htmlFor="email">E-mail:</label>
                 <input
                     type="text"
@@ -172,9 +173,9 @@ const CadastroUsuarioPage = () => {
                 {dirty.email && errosValidacao.email && (
                     <p className="error-message">{errosValidacao.email}</p>
                 )}
-            </div>
+            </Styled.InputWrapper>
 
-            <div className="InputWrapper">
+            <Styled.InputWrapper>
                 <label htmlFor="password">Senha:</label>
                 <input
                     type="password"
@@ -186,9 +187,9 @@ const CadastroUsuarioPage = () => {
                 {dirty.password && errosValidacao.password && (
                     <p className="error-message">{errosValidacao.password}</p>
                 )}
-            </div>
+            </Styled.InputWrapper>
 
-            <div className="InputWrapper">
+            <Styled.InputWrapper>
                 <label htmlFor="tipo">Tipo:</label>
                 <select
                     name="tipo"
@@ -204,13 +205,13 @@ const CadastroUsuarioPage = () => {
                 {dirty.tipo && errosValidacao.tipo && (
                     <p className="error-message">{errosValidacao.tipo}</p>
                 )}
-            </div>
+            </Styled.InputWrapper>
 
-            <button onClick={handleCadastroClick}>Cadastrar</button>
+            <Styled.ButtonCadastro onClick={handleCadastroClick}>Cadastrar</Styled.ButtonCadastro>
 
-            {statusCadastro === 'sucesso' && <p>Cadastrado com sucesso.</p>}
-            {statusCadastro === 'falha' && <p>Falha ao cadastrar.</p>}
-        </div>
+            {statusCadastro === 'sucesso' && <Styled.SuccessMessage>Cadastrado com sucesso.</Styled.SuccessMessage>}
+            {statusCadastro === 'falha' && <Styled.ErrorMessage>Falha ao cadastrar.</Styled.ErrorMessage>}
+        </Styled.ContainerCadastroUsuario>
     );
 };
 
