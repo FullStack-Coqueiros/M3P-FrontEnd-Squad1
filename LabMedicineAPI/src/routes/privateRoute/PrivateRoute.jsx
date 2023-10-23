@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Navigate } from 'react-router-dom';
 import AuthService from '../../services/Auth.Service.jsx';
-import CadastroUsuarioPage from "../../pages/cadastros/usuarios/CadastroUsuariosPage.jsx";
 
 
 const PrivateRoute = ({ element: Element, ...rest }) => {
