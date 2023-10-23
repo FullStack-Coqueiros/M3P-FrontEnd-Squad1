@@ -1,20 +1,115 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Admin",
-      "email": "admin@admin.com",
-      "password": "12345678"
+      "name": "Administrador",
+      "genero": "masculino",
+      "cpf": "011.920.560-27",
+      "telefone": "(48) 9 8853-5179",
+      "email": "admin1@admin.com",
+      "password": "12345678",
+      "tipo": "administrador",
+      "id": 3
     }
   ],
   "usuarios": [],
   "administradores": [],
-  "pacientes": [],
+  "pacientes": [
+    {
+      "id": 1,
+      "nomeCompleto": "Fulano da Silva",
+      "genero": "Masculino",
+      "dataNascimento": "1990-01-01",
+      "cpf": "123.456.789-00",
+      "rg": "1234567 SSP/SP",
+      "estadoCivil": "Solteiro(a)",
+      "telefone": "(99) 9 9999-9999",
+      "email": "fulano@gmail.com",
+      "naturalidade": "São Paulo",
+      "contatoEmergencia": "(99) 9 9999-9999",
+      "alergias": "Nenhuma",
+      "cuidadosEspecificos": "",
+      "convenio": "",
+      "numeroConvenio": "",
+      "validadeConvenio": "",
+      "endereco": {
+        "cep": "12345-678",
+        "cidade": "São Paulo",
+        "estado": "SP",
+        "logradouro": "Rua da Paz",
+        "numero": "123",
+        "complemento": "Apto 45",
+        "bairro": "Centro",
+        "pontoReferencia": "Próximo à Praça"
+      },
+      "statusSistema": true
+    }
+  ],
   "enfermeiros": [],
   "medicos": [],
-  "consultas": [],
-  "exames": [],
-  "medicamentos": [],
-  "dietas": [],
-  "exercicios": []
+  "consultas": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "motivoConsulta": "Dor de cabeça",
+      "dataConsulta": "2023-10-25",
+      "horarioConsulta": "15:30",
+      "descricaoProblema": "Paciente queixa-se de dor de cabeça persistente.",
+      "medicacaoReceitada": "Paracetamol",
+      "dosagemPrecaucoes": "Tomar 1 comprimido a cada 6 horas. Não exceder a dose recomendada.",
+      "statusSistema": true
+    }
+  ],
+  "exames": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "nomeExame": "Hemograma Completo",
+      "dataExame": "2023-10-26",
+      "horarioExame": "08:00",
+      "tipoExame": "Sangue",
+      "laboratorio": "LabEx",
+      "urlDocumento": "https://example.com/documento.pdf",
+      "resultados": "Os resultados estão dentro da faixa normal.",
+      "statusSistema": true
+    }
+  ],
+  "medicamentos": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "nomeMedicamento": "Paracetamol",
+      "data": "2023-10-26",
+      "horario": "12:00",
+      "tipo": "Comprimido",
+      "quantidade": 1.5,
+      "unidade": "mg",
+      "observacoes": "Tomar após as refeições.",
+      "statusSistema": true
+    }
+  ],
+  "dietas": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "nomeDieta": "Low Carb",
+      "data": "2023-10-26",
+      "horario": "18:00",
+      "tipo": "Low Carb",
+      "descricao": "Dieta com baixo teor de carboidratos.",
+      "statusSistema": true
+    }
+  ],
+  "exercicios": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "nomeSerieExercicios": "Resistência Aeróbica",
+      "data": "2023-10-26",
+      "horario": "19:30",
+      "tipo": "Resistência Aeróbica",
+      "quantidadePorSemana": 3.5,
+      "descricao": "Série de exercícios para melhorar a resistência aeróbica.",
+      "statusSistema": true
+    }
+  ]
 }
