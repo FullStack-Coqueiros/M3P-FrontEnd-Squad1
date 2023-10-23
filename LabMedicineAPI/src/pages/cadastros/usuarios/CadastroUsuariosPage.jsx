@@ -2,8 +2,13 @@ import React, { useState } from "react";
 import { UserService } from '../../../services/User.Service.jsx';
 import { useNavigate } from "react-router-dom";
 import AuthService from "../../../services/Auth.Service.jsx";
+import { useAuth } from "../../../context/AuthContext.jsx";
 
 const CadastroUsuarioPage = () => {
+
+    const { auth } = useAuth();
+    const navigate = useNavigate();
+
     const [dadosUsuario, setDadosUsuario] = useState({
         nomeCompleto: '',
         genero: '',
@@ -16,8 +21,6 @@ const CadastroUsuarioPage = () => {
 
     const [errosValidacao, setErrosValidacao] = useState({});
     const [statusCadastro, setStatusCadastro] = useState('');
-
-    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -76,7 +79,7 @@ const CadastroUsuarioPage = () => {
                 navigate('/sem-permissao');
                 return;
             }
-            
+
             await UserService.CreateUser(dadosUsuario);
             setStatusCadastro('sucesso');
             setErrosValidacao({});
