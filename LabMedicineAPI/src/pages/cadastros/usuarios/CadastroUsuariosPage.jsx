@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { UserService } from '../../../services/User.Service.jsx';
-import { useNavigate } from "react-router-dom";
-import AuthService from "../../../services/Auth.Service.jsx";
-import { useAuth } from "../../../context/AuthContext.jsx";
+import { AuthContext } from "../../../context/AuthContext.jsx";
+import { HeaderContext } from "../../../context/HeaderContext.jsx";
 
 const CadastroUsuarioPage = () => {
+
+    const { setData } = useContext(HeaderContext)
+  useEffect(() => {
+    setData({       
+      titulo: 'CADASTRO DE USUÁRIOS',}) 
+      
+    }, []);
+
+    useEffect
+    
+    
+    const { auth } = useContext(AuthContext);
+    
+
     const [dadosUsuario, setDadosUsuario] = useState({
         name: '',
         genero: '',

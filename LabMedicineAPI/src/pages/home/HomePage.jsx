@@ -1,7 +1,7 @@
 import * as Styled from './HomePage.style'
 import { useContext, useEffect, useState } from 'react';
 import { HeaderContext } from '../../context/HeaderContext.jsx';
-import { AuthContext } from '../../Context/AuthContext.jsx';
+import { AuthContext } from '../../context/AuthContext';
 import { Navigate } from 'react-router-dom';
 import { InputPage } from '../../Components/HomeComponents/InputPage/InputPage.jsx';
 import EstatisticasSistema from '../../Components/HomeComponents/InfoSistema/InfoSistema.jsx';
