@@ -5,11 +5,12 @@ export const ContainerEstatisticas = styled.div`
     height: 30vh;
     box-shadow: none;
     justify-content: center;
-    margin: 3% 0;
-    
+    margin: 0%;
+    //border: 1px solid black;
 
 
     h2{
+        margin-top: 10px;
         margin-left: 2%;
     }
 
@@ -21,6 +22,6 @@ export const ContainerCardEstatisticas = styled.div`
     width: 100%;
     height: 12.5vw;
     border-radius: 5px;
-    margin-top: 2vh;
+    margin-top: 1%;
     
 `

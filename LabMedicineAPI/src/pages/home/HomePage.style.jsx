@@ -5,9 +5,9 @@ export const MainHome = styled.div`
   flex-direction: column;
   width: 100%;
   height: 100%;
-  margin: 0vh 5%;
+  margin: 0;
   border-radius: 0.8rem;
-  
+  //border: 1px solid green;
 `;
 
 // .lista-pacientes {

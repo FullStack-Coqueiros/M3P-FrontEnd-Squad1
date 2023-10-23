@@ -2,11 +2,15 @@ import CardEstatistica from '../CardEstatistica/CardEstatistica.jsx';
 import * as Styled from './InfoSistema.Style.jsx';
 import React, { useState, useEffect } from 'react';
 import { ImUsers, ImAidKit, ImFolderPlus } from 'react-icons/im';
+import { GiRemedy, GiFoodTruck, GiHeartInside  } from "react-icons/gi";
 
 function EstatisticasSistema() {
     const [pacientes, setPacientes] = useState([]);
     const [consultas, setConsultas] = useState([]);
     const [exames, setExames] = useState([]);
+    const [medicamentos, setMedicamentos] = useState([]);
+    const [dietas, setDietas] = useState([]);
+    const [exercicios, setExercicios] = useState([]);
 
     const fetchData = async (endpoint) => {
         try {
@@ -34,10 +38,28 @@ function EstatisticasSistema() {
             const examesDoDB = await fetchData('exames');
             setExames(examesDoDB);
           }; 
+
+          const getMedicamentos = async () => {
+            const medicamentosDoDB = await fetchData('medicamentos');
+            setMedicamentos(medicamentosDoDB);
+          };
+
+          const getDietas = async () => {
+            const dietasDoDB = await fetchData('dietas');
+            setDietas(dietasDoDB);
+          };
+
+          const getExercicios = async () => {
+            const exerciciosDoDB = await fetchData('exercicios');
+            setExercicios(exerciciosDoDB);
+          }
           
         getPacientes();
         getConsultas();
-        getExames();     
+        getExames(); 
+        getMedicamentos();
+        getDietas();
+        getExercicios();    
     }, []);
     const totalPacientes = () => {
         return pacientes.length;
@@ -49,6 +71,18 @@ function EstatisticasSistema() {
     
       const totalExames = () => {
         return exames.length;
+      };
+
+      const totalMedicamentos = () => {
+        return medicamentos.length;
+      };
+
+      const totalDietas = () => {
+        return dietas.length;
+      };
+
+      const totalExercicios = () => {
+        return exercicios.length;
       };
     
       const dataCard = [
@@ -70,6 +104,24 @@ function EstatisticasSistema() {
           resultado: totalExames(),
           legenda: 'Exames',
         },
+        {
+          id: '4',
+          icone: <GiRemedy/>,
+          resultado: totalMedicamentos(),
+          legenda: 'Medicamentos',
+        },
+        {
+          id: '5',
+          icone: <GiFoodTruck/>,
+          resultado: totalDietas(),
+          legenda: 'Dietas',
+        },
+        {
+          id: '6',
+          icone: <GiHeartInside/>,
+          resultado: totalExercicios(),
+          legenda: 'Exercícios',
+        }
       ];
     
       return (
