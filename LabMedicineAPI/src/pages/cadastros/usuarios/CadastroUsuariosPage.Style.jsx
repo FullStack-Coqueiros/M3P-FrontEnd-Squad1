@@ -5,6 +5,7 @@ export const ContainerCadastroUsuario = styled.div`
   width: 900px;
   height: auto;
   margin: auto;
+  margin-top: 30px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
