@@ -99,7 +99,7 @@ const CadastroUsuarioPage = () => {
 
     return (
         <Styled.ContainerCadastroUsuario>
-            <h2>Cadastro de Usuário</h2>
+            <h2>Cadastro de Usuário:</h2>
 
             <Styled.InputWrapper>
                 <label htmlFor="name">Nome Completo:</label>

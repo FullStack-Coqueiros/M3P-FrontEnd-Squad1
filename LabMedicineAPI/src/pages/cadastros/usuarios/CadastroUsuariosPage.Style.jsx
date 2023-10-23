@@ -9,6 +9,12 @@ export const ContainerCadastroUsuario = styled.div`
   border: 1px solid #ccc;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    display: flex;
+    justify-content: center;
+    font-weight: 800;
+  }
 `;
 
 export const InputWrapper = styled.div`
