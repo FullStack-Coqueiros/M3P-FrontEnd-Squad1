@@ -9,14 +9,14 @@ export const App = styled.div`
 
 export const SidebarBox = styled.div`
  height: 90%;
-
+ max-width: 25%;
 `
 
 export const Main = styled.div`
  display: flex;
  flex: 1 0 0;
  flex-direction: column;
- width: 90%;
+ width: 100%;
  height: 100%;
 `
 
@@ -29,5 +29,6 @@ export const Content = styled.div`
     height: 100%;
     display: flex;
     justify-content: center;
-    margin: 0;
+    margin: 0px;
+    //border: 1px solid red;
 `
