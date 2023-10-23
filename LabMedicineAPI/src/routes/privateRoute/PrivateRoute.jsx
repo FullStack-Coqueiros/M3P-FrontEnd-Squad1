@@ -5,7 +5,7 @@ import CadastroUsuarioPage from "../../pages/cadastros/usuarios/CadastroUsuarios
 
 
 const PrivateRoute = ({ element: Element, ...rest }) => {
-    const isAuthorized = AuthService.isAuthenticated();
+    const isAuthorized = AuthService.isAdministrator();
 
     return isAuthorized ? <Element {...rest} /> : <Navigate to="/sem-permissao" />;
 };

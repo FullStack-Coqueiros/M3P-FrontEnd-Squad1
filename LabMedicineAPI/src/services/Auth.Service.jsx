@@ -1,11 +1,7 @@
 const AuthService = {
-    isAuthenticated: () => {
-      const token = localStorage.getItem('token');
-      return token && !isTokenExpired(token);
-    },
     isAdministrator: () => {
       const user = getUser();
-      return user && user.roles && user.roles.includes('Administrador');
+      return user && user.tipo === 'administrador';
     },
     login: async (username, password) => {
       try {
@@ -23,9 +19,8 @@ const AuthService = {
         }
   
         const data = await response.json();
-        const { token, user } = data;
+        const { user } = data;
   
-        localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(user));
   
         return true;
@@ -35,28 +30,8 @@ const AuthService = {
       }
     },
     logout: () => {
-      localStorage.removeItem('token');
       localStorage.removeItem('user');
     },
-  };
-  
-  const isTokenExpired = (token) => {
-    const decodedToken = decodeToken(token);
-  
-    if (!decodedToken || !decodedToken.exp) {
-      return true;
-    }
-  
-    const currentTime = Date.now() / 1000;
-    return decodedToken.exp < currentTime;
-  };
-  
-  const decodeToken = (token) => {
-    try {
-      return JSON.parse(atob(token.split('.')[1]));
-    } catch (error) {
-      return null;
-    }
   };
   
   const getUser = () => {
