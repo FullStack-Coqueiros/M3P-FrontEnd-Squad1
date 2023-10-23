@@ -5,8 +5,7 @@
       "name": "Admin",
       "email": "admin@admin.com",
       "password": "12345678",
-      "roles": ["Administrador"],
-      "type": "admin"
+      "tipo": "administrador"
     }
   ],
   "usuarios": [],
