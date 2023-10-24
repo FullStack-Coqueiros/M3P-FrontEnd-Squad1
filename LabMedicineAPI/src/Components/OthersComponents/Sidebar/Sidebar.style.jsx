@@ -18,7 +18,7 @@ export const MenuContainer = styled.div`
 
 export const MenuArea = styled.div`
   display: flex;
-  width: 20rem;
+  width: 18rem;
   height: 100%;
   flex-direction: column;
   align-items: flex-start;
@@ -39,7 +39,7 @@ export const DivCabecalho = styled.div`
   justify-content: center;
   align-items: flex-start;
   margin: auto;
-
+  height: 40%;
   
 `
 
@@ -67,18 +67,18 @@ export const MenuFooter = styled.legend`
 export const MenuFechado = styled.div`
   display: flex;
   width: 7rem;
-  height: 729px;
+  height: 100%;
   flex-direction: column;
   align-items: flex-start;
   background-color: #0f4571;
   padding-bottom: 0%;
-  gap: 1.5rem;
+  gap: 0.5rem;
   padding-top: 0px;
 `;
 
 export const MenuLogoFechado = styled.img`
-  width: 6vw;
-  margin: 2rem auto 4rem;
+  height: 40%;
+  margin: 5rem auto 5rem;
   margin-bottom: 0px
 `
 
@@ -100,8 +100,8 @@ export const LabelSwitchFechado = styled.label`
   display: flex;
   justify-content: center;
   margin-bottom: 0.5vh;
-  width: 100%;
-  height: 100%;
+  //width: 100%;
+  //height: 100%;
   
 `
 
@@ -110,6 +110,7 @@ export const LabelSwitch = styled.div`
   width: 100%;
   height: 100%;
   justify-content: center;
+  align-items: end;
   background-color: #0f4571;
   
   font-size: 0.8rem;

@@ -27,13 +27,18 @@ const SidebarAberto = () => {
             <MenuItem Icon={ImHome} Text="INICIO" To='/' />
             <MenuItem Icon={ImCross} Text="SAIR" To='/login' />
 
-            <Styled.MenuSetor>Pacientes</Styled.MenuSetor>
-            <MenuItem Icon={ImClipboard} Text="CADASTRAR PACIENTE" To='/paciente' />
-            <MenuItem Icon={ImPlus} Text="LISTAR PRONTUÁRIOS" To='/listaProntuarios'  />
+            <Styled.MenuSetor>Listagem</Styled.MenuSetor>
+            
+            <MenuItem Icon={ImPlus} Text="LISTAR PRONTUÁRIOS" To='/lista-prontuarios'  />
 
-            <Styled.MenuSetor>Exames</Styled.MenuSetor>
-            <MenuItem Icon={ImPlus} Text="CADASTRAR CONSULTA" To='/consulta' />
-            <MenuItem Icon={ImClipboard} Text="CADASTRAR EXAME" To='/exame' />
+            <Styled.MenuSetor>Cadastros</Styled.MenuSetor>
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR USUÁRIO" To='/cadastro-usuario' />
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR PACIENTE" To='/cadastro-paciente' />
+            <MenuItem Icon={ImPlus} Text="CADASTRAR CONSULTA" To='/cadastrar-consulta' />
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR EXAME" To='/cadastrar-exame' />
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR MEDICAMENTO" To='/cadastrar-medicamento' />
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR DIETA" To='/cadastrar-dieta' />
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR EXERCÍCIO" To='/cadastrar-exercicio' />
         </Styled.MenuArea>
 
 
