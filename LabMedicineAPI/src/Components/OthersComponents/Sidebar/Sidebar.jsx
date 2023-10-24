@@ -14,7 +14,7 @@ export const Sidebar = () => {
     return (
       <>
       {menu ? <SidebarFechado /> : <SidebarAberto />}
-      {/*           {menu ? menuAberto()  : menuFechado()} */}
+      
 
   
 

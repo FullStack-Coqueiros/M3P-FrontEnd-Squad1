@@ -16,15 +16,19 @@ const SidebarFechado = () => {
             <Styled.MenuLogoFechado src={LabLogo} />
 
             </Styled.DivCabecalho>
-            <Styled.MenuSetor></Styled.MenuSetor>
+            <Styled.MenuSetor>Geral</Styled.MenuSetor>
             <MenuItemFechado Icon={ImHome}  To='/' />
             <MenuItemFechado Icon={ImCross}  To='/login' />
-            <Styled.MenuSetor></Styled.MenuSetor>
-            <MenuItemFechado Icon={ImClipboard}  To='/paciente' />
-            <MenuItemFechado Icon={ImPlus}  To='/listaProntuarios'  />
-            <Styled.MenuSetor></Styled.MenuSetor>
-            <MenuItemFechado Icon={ImPlus}  To='/consulta' />
-            <MenuItemFechado Icon={ ImClipboard }  To='/exame' />
+            <Styled.MenuSetor>Listagem</Styled.MenuSetor>
+            <MenuItemFechado Icon={ImPlus} To='/lista-prontuarios'  />
+            <Styled.MenuSetor>Cadastros</Styled.MenuSetor>
+            <MenuItemFechado Icon={ImClipboard} To='/cadastro-usuario' />
+            <MenuItemFechado Icon={ImClipboard} To='/cadastro-paciente' />
+            <MenuItemFechado Icon={ImPlus} To='/cadastrar-consulta' />
+            <MenuItemFechado Icon={ImClipboard} To='/cadastrar-exame' />
+            <MenuItemFechado Icon={ImClipboard} To='/cadastrar-medicamento' />
+            <MenuItemFechado Icon={ImClipboard} To='/cadastrar-dieta' />
+            <MenuItemFechado Icon={ImClipboard} To='/cadastrar-exercicio' />
 
 
              
