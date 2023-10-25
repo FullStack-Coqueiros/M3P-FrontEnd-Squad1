@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as Styled from './InputPage.Style.jsx';
 import { useForm } from 'react-hook-form';
 import { PacienteService } from '../../../services/Paciente.service.jsx';
+import { UserService } from '../../../services/User.Service.jsx';
 import CardPaciente from '../CardPaciente/CardPaciente.jsx';
 
 export const InputPage = () => {
@@ -11,33 +12,44 @@ export const InputPage = () => {
         reset
     } = useForm();
 
-    const [pacienteSelect, setPacienteSelect] = useState([])
+    const [resultados, setResultados] = useState([]);
 
     const submitInput = async (dataInput) => {
-        const {nome} = dataInput;
-        
-        PacienteService.ShowByNome(nome).then(response => {
-            !response ? alert("Paciente não cadastrado") : reset()
-            setPacienteSelect(response)
-        });
-    }
-    
-    return(
+        const { nome } = dataInput;
+
+        const pacientes = await PacienteService.ShowByNome(nome);
+        const usuarios = await UserService.ShowByNome(nome);
+
+        const resultados = [...pacientes, ...usuarios];
+
+        setResultados(resultados);
+
+        if (!resultados.length) {
+            alert("Nenhum resultado encontrado");
+            reset();
+        }
+    };
+
+    return (
         <>
             <Styled.ContainerInput>
-                <Styled.h2Input>Informações Rápidas de Pacientes</Styled.h2Input>
-                <Styled.InputArea onSubmit={handleSubmit(submitInput)} >
-                    <input 
-                        placeholder='Digite o nome completo do paciente'
+                <Styled.h2Input>Informações Rápidas de Pacientes e Usuários</Styled.h2Input>
+                <Styled.InputArea onSubmit={handleSubmit(submitInput)}>
+                    <input
+                        placeholder='Digite o nome completo do paciente ou usuário'
                         {...register('nome')}
                     />
-                    <button className='botao btn btn-primary material-symbols-outlined' onClick={() => console.log("clicou")} type='submit'><span>Buscar</span></button>
+                    <button className='botao btn btn-primary material-symbols-outlined' type='submit'>
+                        <span>Buscar</span>
+                    </button>
                 </Styled.InputArea>
-            </Styled.ContainerInput> 
+            </Styled.ContainerInput>
 
             <Styled.ContainerCards>
-                {pacienteSelect && pacienteSelect.map(paciente => <CardPaciente paciente={paciente} key={paciente.id}/>)}
+                {resultados && resultados.map(item => (
+                    <CardPaciente key={item.id} paciente={item} />
+                ))}
             </Styled.ContainerCards>
         </>
-    )
-}
+    );
+};
