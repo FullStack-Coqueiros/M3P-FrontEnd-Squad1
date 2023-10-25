@@ -66,6 +66,7 @@ export const InputPage = () => {
             </Styled.ContainerInput>
 
             <Styled.ContainerCards>
+                
                 {resultados.length > 0
                     ? resultados.map(item => (
                         <div key={item.id}>
