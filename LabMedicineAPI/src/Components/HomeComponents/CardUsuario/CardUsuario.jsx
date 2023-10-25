@@ -24,4 +24,4 @@ console.log(usuario)
   );
 };
 
-export default <CardUsuario></CardUsuario>;
+export default CardUsuario;
