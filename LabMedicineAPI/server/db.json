@@ -1,18 +1,16 @@
 {
   "users": [
     {
-      "name": "Administrador",
+      "nomeCompleto": "Administrador",
       "genero": "masculino",
-      "cpf": "011.920.560-27",
+      "cpf": "135.652.495-21",
       "telefone": "(48) 9 8853-5179",
       "email": "admin1@admin.com",
       "password": "12345678",
       "tipo": "administrador",
-      "id": 3
+      "id": 1
     }
   ],
-  "usuarios": [],
-  "administradores": [],
   "pacientes": [
     {
       "id": 1,
