@@ -21,5 +21,5 @@ Comandos para rodar a aplicação:
      json-server --watch ./server/db.json
 ```
 
-email: "admin@admin.com"
+email: "admin1@admin.com"
 password: "12345678"

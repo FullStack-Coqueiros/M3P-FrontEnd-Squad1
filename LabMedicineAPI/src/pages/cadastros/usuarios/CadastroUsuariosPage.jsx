@@ -20,7 +20,7 @@ const CadastroUsuarioPage = () => {
     
 
     const [dadosUsuario, setDadosUsuario] = useState({
-        name: '',
+        nomeCompleto: '',
         genero: '',
         cpf: '',
         telefone: '',
@@ -43,8 +43,8 @@ const CadastroUsuarioPage = () => {
         const erros = {};
 
         // validação do nome completo
-        if (!dadosUsuario.name || dadosUsuario.name.length < 8 || dadosUsuario.name.length > 64) {
-            erros.name = 'Nome completo é obrigatório e deve ter entre 8 e 64 caracteres.';
+        if (!dadosUsuario.nomeCompleto || dadosUsuario.nomeCompleto.length < 8 || dadosUsuario.nomeCompleto.length > 64) {
+            erros.nomeCompleto = 'Nome completo é obrigatório e deve ter entre 8 e 64 caracteres.';
         }
 
         // validação do email
@@ -105,13 +105,13 @@ const CadastroUsuarioPage = () => {
                 <label htmlFor="name">Nome Completo:</label>
                 <input
                     type="text"
-                    id="name"
-                    name="name"
-                    value={dadosUsuario.name}
+                    id="nomeCompleto"
+                    name="nomeCompleto"
+                    value={dadosUsuario.nomeCompleto}
                     onChange={handleChange}
                 />
-                {dirty.name && errosValidacao.name && (
-                    <p className="error-message">{errosValidacao.name}</p>
+                {dirty.nomeCompleto && errosValidacao.nomeCompleto && (
+                    <p className="error-message">{errosValidacao.nomeCompleto}</p>
                 )}
             </Styled.InputWrapper>
 
