@@ -37,7 +37,22 @@ export const InputGroup = styled.div`
   gap: 0.625rem;
   width: ${({ $width }) => ($width ? $width : '100%')};
 
-  
+  select{
+    display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+  align-self: center;
+  width: ${({$width}) => $width ? $width : '95%'};
+  border-radius: 0.3125rem;
+  background: ${({ $outlined }) => { return $outlined ? 'transparent' : 'rgba(82, 129, 220, 1)'}};
+  border:  ${({ $outlined }) => { return !$outlined ? 0 : '1px solid rgba(82, 129, 220, 1)'}};
+  color: ${({ $outlined }) => { return !$outlined ? '#EFEFEF' : 'rgba(82, 129, 220, 1)'}};
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  }
 `;
 
 export const Button = styled.button`

@@ -1,94 +1,64 @@
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { InputComponent } from '../../InputComponents/InputComponent.jsx';
 import { PacienteService } from '../../../services/Paciente.service.jsx';
 import { Switch } from 'antd';
 import * as Styled from './FormPaciente.style.jsx';
 
-export const FormPaciente = () => {
-
-    const genero = [
-        {
-            id: 1,
-            value: 'f',
-            label: 'Feminino'
-        },
-        {
-            id: 2,
-            value: 'm',
-            label: 'Masculino'
-        },
-        {
-            id: 3,
-            value: 'n',
-            label: 'Prefiro não responder'
-        }
-    ];
-
-    const estadoCivil = [
-        {
-            id: 1,
-            value: 'S',
-            label: 'Solteiro(a)'
-        },
-        {
-            id: 2,
-            value: 'C',
-            label: 'Casado(a)'
-        },
-        {
-            id: 3,
-            value: 'V',
-            label: 'Viuvo(a)'
-        },
-        {
-            id: 4,
-            value: 'D',
-            label: 'Divorciado(a)'
-        },
-        {
-            id: 5,
-            value: 'O',
-            label: 'Outro(a)'
-        }
-    ];
-
+const generoOptions = [
+    { id: 1, value: 'f', label: 'Feminino' },
+    { id: 2, value: 'm', label: 'Masculino' },
+    { id: 3, value: 'n', label: 'Prefiro não responder' },
+  ];
+  
+  const estadoCivilOptions = [
+    { id: 1, value: 'S', label: 'Solteiro(a)' },
+    { id: 2, value: 'C', label: 'Casado(a)' },
+    { id: 3, value: 'V', label: 'Viuvo(a)' },
+    { id: 4, value: 'D', label: 'Divorciado(a)' },
+    { id: 5, value: 'O', label: 'Outro(a)' },
+  ];
+  
+  const FormPaciente = () => {
     const {
-        register,
-        handleSubmit,
-        reset,
-        formState: { errors },
-    } = useForm()
-
+      register,
+      handleSubmit,
+      reset,
+      formState: { errors },
+    } = useForm();
+  
     const createPaciente = (pacienteData) => {
-        PacienteService.CreatePaciente(pacienteData)
+      PacienteService.CreatePaciente(pacienteData)
         .then(response => {
-            console.log('Paciente cadastrado com sucesso:', response);
-            reset();
+          console.log('Paciente cadastrado com sucesso:', response);
+          reset();
         })
         .catch(error => {
-            console.error('Erro ao cadastrar paciente:', error);
+          console.error('Erro ao cadastrar paciente:', error);
         });
-
-        const deletePaciente = (pacienteData) => {
-            PacienteService.DeletePaciente(pacienteData.nomeCompleto)
-            .then(response => {
-                console.log("Paciente deletado com sucesso:", response);
-                reset();
-            })
-            .catch(error => {
-                console.error('Erro ao deletar paciente:', error);
-            });
-        };
-
-        const submitForm = async (pacienteData) => {
-            const paciente = await PacienteService.CreatePaciente(pacienteData);
-
-            if(!paciente) {
-                alert ("Novo paciente cadastrado");
-                reset();
-            } else {
-                alert("Paciente não Cadastrado");
-            }
+    };
+  
+    const deletePaciente = (pacienteData) => {
+      PacienteService.DeletePaciente(pacienteData.nomeCompleto)
+        .then(response => {
+          console.log("Paciente deletado com sucesso:", response);
+          reset();
+        })
+        .catch(error => {
+          console.error('Erro ao deletar paciente:', error);
+        });
+    };
+  
+    const submitForm = async (pacienteData) => {
+      const paciente = await PacienteService.CreatePaciente(pacienteData);
+  
+      if (!paciente) {
+        alert("Novo paciente cadastrado");
+        reset();
+      } else {
+        alert("Paciente não Cadastrado");
+      }
+    };
 
             return (
                 <>
@@ -127,21 +97,21 @@ export const FormPaciente = () => {
                                 required: true,
                             })
                             }}
-                            error={errors.nome}
+                            error={errors.nomeCompleto}
                             />
 
-                            <SelectComponent $width={'20%'}
+                            <select
+                            {...register('genero', { required: true })}
                             id='genero'
                             name='genero'
                             label={'Gênero'}
-                            options={genero}
-                            register={{
-                                ...register('genero', {
-                                required: true,
-                                })
-                            }}
-                            error={errors.genero}
-                            />
+                            >
+                            {generoOptions.map(option => (
+                                <option key={option.id} value={option.value}>
+                                {option.label}
+                                </option>
+                            ))}
+                            </select>
 
                             <InputComponent $width={'10 %'}
                             id='dataNascimento'
@@ -155,7 +125,7 @@ export const FormPaciente = () => {
                             
                             })
                             }}
-                            error={errors.nasc}
+                            error={errors.dataNascimento}
                             />
 
                         </Styled.InputGroup>
@@ -192,19 +162,18 @@ export const FormPaciente = () => {
                             error={errors.rg}
                             />
 
-                            <SelectComponent $width={'30%'}
+                            <select
+                            {...register('estadoCivil', { required: false })}
                             id='estadoCivil'
                             name='estadoCivil'
                             label={'Estado Civil'}
-                            options={estadoCivil}
-                            register={{
-                                ...register('estadoCivil', {
-                                
-                            required: false,
-                                })
-                            }}
-                            error={errors.estadoCivil}
-                            />
+                            >
+                            {estadoCivilOptions.map(option => (
+                                <option key={option.id} value={option.value}>
+                                {option.label}
+                                </option>
+                            ))}
+                            </select>
 
                         </Styled.InputGroup>
 
@@ -289,7 +258,7 @@ export const FormPaciente = () => {
                                 required: false,
                             })
                             }}
-                            error={errors.NCart}
+                            error={errors.numeroConvenio}
                             />
 
                             <InputComponent $width={'100%'}
@@ -323,7 +292,7 @@ export const FormPaciente = () => {
                             placeholder='Informe o CEP'
                             name='cep'
                             label='CEP'
-                            /* onBlur={buscaCEP} */
+                            
                                 register={{
                             ...register('cep', {
                                 required: false,
@@ -338,8 +307,7 @@ export const FormPaciente = () => {
                             placeholder='Digite a Cidade'
                             name='cidade'
                             label='Cidade'
-                        /*             defaultValue={endereco.localidade || ''}
-                        */              register={{
+                                      register={{
                             ...register('cidade', {
                                 required: false,
                             })
@@ -353,13 +321,13 @@ export const FormPaciente = () => {
                             placeholder='Estado'
                             name='uf'
                             label='Estado'
-                            /* defaultValue={endereco.uf || ''} */
+                            
                                 register={{
-                            ...register('uf', {
+                            ...register('estado', {
                                 required: false,
                             })
                             }}
-                            error={errors.uf}
+                            error={errors.estado}
                             />
 
                         </Styled.InputGroup>
@@ -368,18 +336,18 @@ export const FormPaciente = () => {
                         <Styled.InputGroup>
 
                             <InputComponent $width={'500%'}
-                            id='rua'
+                            id='endereco'
                             type='string'
                             placeholder='Informe seu endereço'
-                            name='rua'
-                            label='Logradouro'
-                            /* defaultValue={endereco.logradouro || ''} */
+                            name='endereco'
+                            label='endereco'
+                            
                                 register={{
-                            ...register('rua', {
+                            ...register('endereco', {
                                 required: false,
                             })
                             }}
-                            error={errors.rua}
+                            error={errors.endereco}
                             />
 
                             <InputComponent $width={'100%'}
@@ -388,7 +356,7 @@ export const FormPaciente = () => {
                             placeholder='Número'
                             label='Número'
                             name='numRua'
-                            /* defaultValue={endereco.numero || ''} */
+                           
                                 register={{
                             ...register('numRua', {
                                 required: false,
@@ -404,13 +372,13 @@ export const FormPaciente = () => {
                         <Styled.InputGroup>
 
                             <InputComponent $width={'100%'}
-                            id='compl'
+                            id='complemento'
                             type='string'
                             placeholder='Complemento'
-                            name='compl'
+                            name='complemento'
                             label='Complemento'
                                 register={{
-                            ...register('compl', {
+                            ...register('complemento', {
                                 required: false,
                             })
                             }}
@@ -423,7 +391,7 @@ export const FormPaciente = () => {
                             placeholder='Digite o seu bairro'
                             name='bairro'
                             label='Bairro'
-                            /* defaultValue={endereco.bairro || ''} */
+                            
                                 register={{
                             ...register('bairro', {
                                 required: false,
@@ -433,17 +401,17 @@ export const FormPaciente = () => {
                             />
 
                             <InputComponent $width={'100%'}
-                            id='refEnd'
+                            id='pontoReferencia'
                             type='string'
                             placeholder='Referência'
-                            name='refEnd'
+                            name='pontoReferencia'
                             label='Ponto de Referência'
                                 register={{
-                            ...register('refEnd', {
+                            ...register('pontoReferencia', {
                                 required: false,
                             })
                             }}
-                            error={errors.refEnd}
+                            error={errors.pontoReferencia}
                             />
 
                         </Styled.InputGroup>
@@ -456,5 +424,4 @@ export const FormPaciente = () => {
                 </>
             )
         }
-    }
-}
+    export default FormPaciente;

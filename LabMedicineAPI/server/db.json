@@ -160,70 +160,9 @@
   ],
   "enfermeiros": [],
   "medicos": [],
-  "consultas": [
-    {
-      "id": 1,
-      "pacienteId": 1,
-      "motivoConsulta": "Dor de cabeça",
-      "dataConsulta": "2023-10-25",
-      "horarioConsulta": "15:30",
-      "descricaoProblema": "Paciente queixa-se de dor de cabeça persistente.",
-      "medicacaoReceitada": "Paracetamol",
-      "dosagemPrecaucoes": "Tomar 1 comprimido a cada 6 horas. Não exceder a dose recomendada.",
-      "statusSistema": true
-    }
-  ],
-  "exames": [
-    {
-      "id": 1,
-      "pacienteId": 1,
-      "nomeExame": "Hemograma Completo",
-      "dataExame": "2023-10-26",
-      "horarioExame": "08:00",
-      "tipoExame": "Sangue",
-      "laboratorio": "LabEx",
-      "urlDocumento": "https://example.com/documento.pdf",
-      "resultados": "Os resultados estão dentro da faixa normal.",
-      "statusSistema": true
-    }
-  ],
-  "medicamentos": [
-    {
-      "id": 1,
-      "pacienteId": 1,
-      "nomeMedicamento": "Paracetamol",
-      "data": "2023-10-26",
-      "horario": "12:00",
-      "tipo": "Comprimido",
-      "quantidade": 1.5,
-      "unidade": "mg",
-      "observacoes": "Tomar após as refeições.",
-      "statusSistema": true
-    }
-  ],
-  "dietas": [
-    {
-      "id": 1,
-      "pacienteId": 1,
-      "nomeDieta": "Low Carb",
-      "data": "2023-10-26",
-      "horario": "18:00",
-      "tipo": "Low Carb",
-      "descricao": "Dieta com baixo teor de carboidratos.",
-      "statusSistema": true
-    }
-  ],
-  "exercicios": [
-    {
-      "id": 1,
-      "pacienteId": 1,
-      "nomeSerieExercicios": "Resistência Aeróbica",
-      "data": "2023-10-26",
-      "horario": "19:30",
-      "tipo": "Resistência Aeróbica",
-      "quantidadePorSemana": 3.5,
-      "descricao": "Série de exercícios para melhorar a resistência aeróbica.",
-      "statusSistema": true
-    }
-  ]
+  "consultas": [],
+  "exames": [],
+  "medicamentos": [],
+  "dietas": [],
+  "exercicios": []
 }

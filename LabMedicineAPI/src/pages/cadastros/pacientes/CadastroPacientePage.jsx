@@ -2,11 +2,11 @@ import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from '../../../context/AuthContext.jsx';
 import InputMask from 'react-input-mask';
 import { HeaderContext } from '../../../context/HeaderContext.jsx';
-import { FormPaciente } from '../../../Components/FormularioComponents/FormPacientes/FormPaciente.jsx';
+import FormPaciente from '../../../Components/FormularioComponents/FormPacientes/FormPaciente.jsx';
 import { PacienteService } from "../../../services/Paciente.service.jsx";
 import * as Styled from './CadastroPacientePage.style.jsx';
 
-export const CadastroPaciente = () => {
+export const CadastroPacientePage = () => {
     const { setData } = useContext(HeaderContext);
     useEffect(() => {
         setData({
@@ -122,8 +122,8 @@ export const CadastroPaciente = () => {
             setFormData({
               ...formData,
               cep,
-              cidade: data.localidade,
-              estado: data.uf,
+              cidade: data.cidade,
+              estado: data.estado,
               logradouro: data.logradouro,
               complemento: data.complemento,
               bairro: data.bairro,
@@ -133,21 +133,17 @@ export const CadastroPaciente = () => {
             
           }
         }
-    };
+    }
 
-    const usuarios = {
-        id: 1,
-        nome: "Nome de Usuário",
-      };
-
+    
       return (
         <Styled.containerCadastroPaciente>
           
             <Styled.H3>Preencha os campos para cadastrar o paciente</Styled.H3>
           
-          <div>
+          
             <FormPaciente />
-          </div>
+          
         </Styled.containerCadastroPaciente>
       );
 }
