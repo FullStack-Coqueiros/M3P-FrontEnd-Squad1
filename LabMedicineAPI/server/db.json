@@ -160,9 +160,70 @@
   ],
   "enfermeiros": [],
   "medicos": [],
-  "consultas": [],
-  "exames": [],
-  "medicamentos": [],
-  "dietas": [],
-  "exercicios": []
+  "consultas": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "motivo": "Dor de cabeça",
+      "dataConsulta": "2023-10-26",
+      "horarioConsulta": "14:30",
+      "descricaoProblema": "Paciente queixa-se de dor de cabeça constante.",
+      "medicacaoReceitada": "Dipirona 500mg",
+      "dosagemPrecaucoes": "Tomar 1 comprimido a cada 6 horas",
+      "statusSistema": true
+    }
+  ],
+  "exames": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "nomeExame": "Exame de Sangue",
+      "dataExame": "2023-10-27",
+      "horarioExame": "08:00",
+      "tipoExame": "Hemograma",
+      "laboratorio": "Laboratório ABC",
+      "urlDocumento": "https://example.com/documento.pdf",
+      "resultados": "Resultados do hemograma dentro dos padrões normais.",
+      "statusSistema": true
+    }
+  ],
+  "medicamentos": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "nomeMedicamento": "Paracetamol",
+      "data": "2023-10-26",
+      "horario": "10:00",
+      "tipo": "Comprimido",
+      "quantidade": 2.5,
+      "unidade": "mg",
+      "observacoes": "Tomar com alimentos.",
+      "statusSistema": true
+    }
+  ],
+  "dietas": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "nomeDieta": "Dieta Low Carb",
+      "data": "2023-10-26",
+      "horario": "12:00",
+      "tipoDieta": "Low Carb",
+      "descricao": "Restrição de carboidratos.",
+      "statusSistema": true
+    }
+  ],
+  "exercicios": [
+    {
+      "id": 1,
+      "pacienteId": 1,
+      "nomeExercicio": "Corrida",
+      "data": "2023-10-26",
+      "horario": "17:00",
+      "tipoExercicio": "Resistência Aeróbica",
+      "quantidadeSemana": 3,
+      "descricao": "Correr por 30 minutos.",
+      "statusSistema": true
+    }
+  ]
 }
