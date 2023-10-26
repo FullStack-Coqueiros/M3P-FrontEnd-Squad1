@@ -3,6 +3,7 @@ import { useForm } from  "react-hook-form";
 import { InputComponent } from "../../InputComponents/InputComponent.jsx";
 import { ConsultaService } from "../../../services/Consulta.service.jsx";
 import { Switch } from "antd";
+import * as Styled from './FormConsulta.style.jsx';
 
 export const FormConsulta = ({ paciente }) => {
     const {
