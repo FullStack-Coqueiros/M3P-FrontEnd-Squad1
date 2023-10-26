@@ -5,6 +5,7 @@ import { LoginPage } from "../pages/login/LoginPage.jsx";
 import PaginaSemPermissao from '../pages/semPermissao/PaginaSemPermissao.jsx';
 import CadastroUsuarioPage from "../pages/cadastros/usuarios/CadastroUsuariosPage.jsx";
 import PrivateRoute from "./privateRoute/PrivateRoute.jsx";
+import { CadastroPacientePage } from "../pages/cadastros/pacientes/CadastroPacientePage.jsx";
 
 
 export const AppRoutes = () => {
@@ -15,6 +16,7 @@ export const AppRoutes = () => {
                 <Route path="/" element={<Layout/>}>
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/cadastro-usuario" element={<CadastroUsuarioPage/>}/>
+                    <Route path="/cadastro-paciente" element={<CadastroPacientePage/>}/>
                 </Route>
             </Routes>
         </Router>
