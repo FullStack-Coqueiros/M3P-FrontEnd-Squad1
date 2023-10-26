@@ -10,6 +10,20 @@ const Get = async () => {
     return data;
    }
 
+   const GetCEPData = async (cep) => {
+    try {
+        const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+        if (!response.ok) {
+            throw new Error("CEP não encontrado");
+        }
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(error);
+        throw new Error("Erro ao obter dados do CEP");
+    }
+};
+
 const Create = async(data) => {
       const response = await fetch(API_URL, {
         method: 'POST',
@@ -70,8 +84,14 @@ const Delete = (id) => {
     LocalStorageService.set('users', Get().filter( user => user.id !== id));
 }
 
-const DeletePaciente = (id) => {
-    LocalStorageService.set('pacientes', Get().filter( pacientes => pacientes.id !== id));
+const DeletePaciente = async (id) => {
+  const response = await fetch(`${API_URL}/${id}`, {
+      method: 'DELETE',
+  });
+
+  if (!response.ok) {
+      throw new Error(`Erro ao excluir paciente: ${response.statusText}`);
+  }
 }
 
 const Update = (id, newUser) => {
@@ -82,6 +102,7 @@ const Update = (id, newUser) => {
 
 export const PacienteService = {
     Get,
+    GetCEPData,
     Create,
     CreatePaciente,
     Show,
