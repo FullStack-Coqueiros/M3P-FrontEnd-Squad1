@@ -6,6 +6,7 @@ import PaginaSemPermissao from '../pages/semPermissao/PaginaSemPermissao.jsx';
 import CadastroUsuarioPage from "../pages/cadastros/usuarios/CadastroUsuariosPage.jsx";
 import PrivateRoute from "./privateRoute/PrivateRoute.jsx";
 import { CadastroPacientePage } from "../pages/cadastros/pacientes/CadastroPacientePage.jsx";
+import { CadastroMedicamentosPage } from "../pages/cadastros/medicamentos/CadastroMedicamentosPage.jsx";
 
 
 export const AppRoutes = () => {
@@ -17,6 +18,7 @@ export const AppRoutes = () => {
                     <Route path="/" element={<HomePage/>}/>
                     <Route path="/cadastro-usuario" element={<CadastroUsuarioPage/>}/>
                     <Route path="/cadastro-paciente" element={<CadastroPacientePage/>}/>
+                    <Route path="/cadastrar-medicamento" element={<CadastroMedicamentosPage/>}/>
                 </Route>
             </Routes>
         </Router>

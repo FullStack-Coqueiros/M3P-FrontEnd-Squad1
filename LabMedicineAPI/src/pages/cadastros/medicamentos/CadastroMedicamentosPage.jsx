@@ -4,7 +4,7 @@ import { AuthContext } from "../../../context/AuthContext.jsx";
 import { HeaderContext } from "../../../context/HeaderContext.jsx";
 import * as Styled from './CadastroMedicamentosPage.Style.jsx';
 
-const CadastroMedicamentosPage = () =>{
+export const CadastroMedicamentosPage = () =>{
     const { setData } = useContext(HeaderContext)
     useEffect(() => {
       setData({       
@@ -35,7 +35,9 @@ useEffect
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setDadosUsuario((dadosAntigos) => ({ ...dadosAntigos, [name]: value }));
+        const numericValue = parseFloat(value).toFixed(2);
+        setDadosMedicacao({...dadosMedicacao,[name]:numericValue});
+        setDadosMedicacao((dadosAntigos) => ({ ...dadosAntigos, [name]: value }));
         setDirty((prevDirty) => ({ ...prevDirty, [name]: true }));
     };
     const validarCampos = () => {
@@ -109,9 +111,9 @@ useEffect
                 )}
             </Styled.InputWrapper>
             <Styled.InputWrapper>
-                <label htmlFor="date">Horário:</label>
+                <label htmlFor="data">Horário:</label>
                 <input
-                    type="date"
+                    type="time"
                     id="horario"
                     name="horario"
                     value={dadosMedicacao.horario}
@@ -146,11 +148,12 @@ useEffect
             <Styled.InputWrapper>
                 <label htmlFor="dosagem">Dosagem:</label>
                 <input
-                    type="decimal"
+                    type="number"
                     id="quantiidade"
                     name="quantidade"
                     value={dadosMedicacao.quantidade}
                     onChange={handleChange}
+                    step="0.01"
                 />
                 {dirty.quantidade && errosValidacao.quantidade && (
                     <p className="error-message">{errosValidacao.quantidade}</p>
@@ -204,6 +207,33 @@ useEffect
                     <p className="error-message">{errosValidacao.statusSistema}</p>
                 )}
                 </Styled.InputWrapper>
+                <Styled.InputWrapper>
+                <label htmlFor="paciente id">Cód Paciente:</label>
+                <input
+                    type="number"
+                    id="pacienteId"
+                    name="pacienteId"
+                    value={dadosMedicacao.pacienteId}
+                    onChange={handleChange}
+                />
+                </Styled.InputWrapper>
+                <Styled.InputWrapper>
+                <label htmlFor="usuario id">Cód Usuário:</label>
+                <input
+                    type="number"
+                    id="usuarioId"
+                    name="usuarioId"
+                    value={dadosMedicacao.usuarioId}
+                    onChange={handleChange}
+                />
+                </Styled.InputWrapper>
+                <Styled.ButtonCadastro onClick={handleCadastroClick}>Cadastrar</Styled.ButtonCadastro>
+
+            {statusCadastro === 'sucesso' && <Styled.SuccessMessage>Cadastrado com sucesso.</Styled.SuccessMessage>}
+            {statusCadastro === 'falha' && <Styled.ErrorMessage>Falha ao cadastrar.</Styled.ErrorMessage>}
+        </Styled.ContainerCadastroMedicacao>
+    );
+
 
 
 };
