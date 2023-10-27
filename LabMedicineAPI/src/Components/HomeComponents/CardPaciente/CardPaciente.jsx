@@ -2,7 +2,7 @@ import * as Styled from './CardPaciente.Style.jsx';
 import { ImUser } from 'react-icons/im';
 
 const CardPaciente = ({ paciente }) => {
-console.log(paciente)
+
   return (
     <>
       <Styled.CardPacienteContainer>

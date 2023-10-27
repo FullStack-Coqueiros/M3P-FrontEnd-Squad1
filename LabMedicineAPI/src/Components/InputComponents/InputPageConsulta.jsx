@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { PacienteService } from '../../services/Paciente.service.jsx';
 import { FormConsulta } from '../FormularioComponents/FormConsultas/FormConsulta.jsx';
@@ -9,26 +9,24 @@ export const InputPageConsulta = () => {
         register,
         handleSubmit,
         reset,
-        formState:{error},
+        formState: { error },
     } = useForm();
 
-    const [pacienteSelect, setPacienteSelect] = useState(null)
+    const [pacienteSelect, setPacienteSelect] = useState(null);
 
     const submitInput = async (dataInput) => {
-        const {nome} = dataInput;
+        const { nomeCompleto } = dataInput;
 
-        const paciente = await PacienteService.ShowByNome(nome);
-        console.log(paciente.nome)
+        const paciente = await PacienteService.ShowByNome(nomeCompleto);
 
-        if(!paciente) {
-            alert('Usuario não encontrado');
+        if (!paciente) {
+            alert('Usuário não cadastrado');
             setPacienteSelect(null);
-            reset();
         } else {
             setPacienteSelect(paciente);
             reset();
         }
-    }
+    };
 
     return (
         <>
@@ -37,15 +35,15 @@ export const InputPageConsulta = () => {
                 <Styled.InputArea onSubmit={handleSubmit(submitInput)}>
                     <input
                         placeholder='Digite o nome completo do paciente'
-                        {...register('nome')}
+                        {...register('nomeCompleto')}
                     />
                     <button className='botao botao btn btn-primary' type='submit'><span className='material-symbols-outlined'>Buscar</span></button>
                 </Styled.InputArea>
-            </Styled.ContainerInput> 
+            </Styled.ContainerInput>
 
             <Styled.ContainerCards>
-                {pacienteSelect && pacienteSelect.map(paciente => <FormConsulta paciente={paciente} key={paciente.id}/>)}
+             {pacienteSelect && pacienteSelect.map(paciente => <FormConsulta paciente={paciente} key={paciente.id}/>)}
             </Styled.ContainerCards>
         </>
-    )
-}
+    );
+};

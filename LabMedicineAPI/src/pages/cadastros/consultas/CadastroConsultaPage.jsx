@@ -20,5 +20,7 @@ export const CadastroConsultaPage = () => {
             </Styled.ConsultaContainer>
         )
     }
+  
     return render();
+    
 }

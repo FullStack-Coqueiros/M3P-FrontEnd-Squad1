@@ -2,15 +2,15 @@ import { useState } from "react";
 import { useForm } from  "react-hook-form";
 import { InputComponent } from "../../InputComponents/InputComponent.jsx";
 import { ConsultaService } from "../../../services/Consulta.service.jsx";
-import { Switch } from "antd";
 import * as Styled from './FormConsulta.style.jsx';
+import { Switch } from "antd";
 
 export const FormConsulta = ({ paciente }) => {
     const {
         register,
         handleSubmit,
         reset,
-        formState: { erros },
+        formState: { errors },
     } = useForm();
 
     const createConsulta = (consultaData) => {
@@ -50,7 +50,7 @@ export const FormConsulta = ({ paciente }) => {
     return (
         <Styled.Form onSubmit={handleSubmit(submitForm)}>
             <Styled.Header>
-                <Styled.Title>Consulta de {paciente.nome}</Styled.Title>
+                <Styled.Title>Consulta de {paciente.nomeCompleto}</Styled.Title>
 
                 <Styled.LabelSwitch>Editar</Styled.LabelSwitch>
 
