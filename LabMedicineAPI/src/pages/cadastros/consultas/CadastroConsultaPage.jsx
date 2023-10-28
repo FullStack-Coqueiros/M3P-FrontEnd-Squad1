@@ -3,24 +3,22 @@ import { HeaderContext } from '../../../context/HeaderContext.jsx';
 import { InputPageConsulta } from '../../../Components/InputComponents/InputPageConsulta.jsx';
 import * as Styled from './CadastroConsultaPage.Style.jsx';
 
-export const CadastroConsultaPage = () => {
+const CadastroConsultaPage = () => {
     const { setData } = useContext(HeaderContext)
     useEffect(() => {
         setData({
             titulo: 'CADASTRAR CONSULTA',})
     }, []);
 
-    const render = () => {
-        return (
-            <Styled.ConsultaContainer>
+   
+    return (
+        <Styled.ConsultaContainer>
+        
+            <InputPageConsulta />
             
-                <InputPageConsulta />
-              
-            
-            </Styled.ConsultaContainer>
-        )
-    }
-  
-    return render();
-    
+        
+        </Styled.ConsultaContainer>
+    )
 }
+
+export default CadastroConsultaPage;

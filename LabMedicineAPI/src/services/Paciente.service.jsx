@@ -73,12 +73,12 @@ const ShowByEmail = async (email) => {
 }
 
 const ShowByNome = async (nome) => {
-  const filter = `?nome=${nome}`;
-  const response = await fetch(`${API_URL}/${filter}`);
-  const data = await response.json();
-  
-  return data;
-}
+    const filter = `?nome=${nome}`;
+    const response = await fetch(`${API_URL}/${filter}`);
+    const data = await response.json();
+    
+    return data;
+  }
 
 const Delete = (id) => {
     LocalStorageService.set('users', Get().filter( user => user.id !== id));

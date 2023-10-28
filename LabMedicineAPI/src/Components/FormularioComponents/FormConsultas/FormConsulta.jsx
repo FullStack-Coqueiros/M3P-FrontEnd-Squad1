@@ -6,6 +6,7 @@ import * as Styled from './FormConsulta.style.jsx';
 import { Switch } from "antd";
 
 export const FormConsulta = ({ paciente }) => {
+    console.log("Dados do paciente:", paciente);
     const {
         register,
         handleSubmit,
