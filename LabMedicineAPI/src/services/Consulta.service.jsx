@@ -60,6 +60,13 @@ const ShowByEmail = async (email) => {
     return data[0];
 }
 
+const ShowByNome = async (nomeCompleto) => {
+  const filter = `?nomeCompleto=${nomeCompleto}`;
+  const response = await fetch(`${API_URL}/${filter}`);
+  const data = await response.json();
+  
+  return data;
+}
 
 const Delete = (id) => {
     LocalStorageService.set('users', Get().filter( user => user.id !== id));
@@ -84,6 +91,7 @@ export const ConsultaService = {
     CreateConsulta,
     Show,
     ShowByEmail,
+    ShowByNome,
     Delete,
     DeleteConsulta,
     Update
