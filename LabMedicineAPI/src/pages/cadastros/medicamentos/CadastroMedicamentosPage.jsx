@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { UserService } from '../../../services/User.Service.jsx';
 import { AuthContext } from "../../../context/AuthContext.jsx";
 import { HeaderContext } from "../../../context/HeaderContext.jsx";
+import { MedicamentoService } from "../../../services/Medicamentos.service.jsx";
 import * as Styled from './CadastroMedicamentosPage.Style.jsx';
 
 export const CadastroMedicamentosPage = () =>{
@@ -71,7 +72,7 @@ useEffect
             return;
         }
         try {
-            await Medicamentos.service.CreateUser(dadosMedicacao);
+            await MedicamentoService.Create(dadosMedicacao);
             setStatusCadastro('sucesso');
             setErrosValidacao({});
         } catch (error) {
@@ -187,9 +188,10 @@ useEffect
                     value={dadosMedicacao.observacoes}
                     onChange={handleChange}
                 />
-                {dirty.observacoes && errosValidacao.observacoes && (
+                <span>
+                    {dirty.observacoes && errosValidacao.observacoes && (
                     <p className="error-message">{errosValidacao.observacoes}</p>
-                )}
+                )}</span>
             </Styled.InputWrapper>
             <Styled.InputWrapper>
                 <label htmlFor="status">Status no Sistema:</label>

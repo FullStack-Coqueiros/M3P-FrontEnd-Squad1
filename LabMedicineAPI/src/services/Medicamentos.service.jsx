@@ -1,6 +1,6 @@
 import { LocalStorageService } from "./LocalStorage.Server";
 
-const API_URL = 'http://localhost:3000/medicamentos';
+const API_URL = 'http://localhost:7289/api/medicamentos';
 
 const Get = async () => {
     const response = await fetch(API_URL);
