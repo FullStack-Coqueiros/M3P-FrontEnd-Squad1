@@ -13,20 +13,33 @@ export const InputPageConsulta = () => {
     } = useForm();
 
     const [pacienteSelect, setPacienteSelect] = useState(null);
+    const [buscaRealizada, setBuscaRealizada] = useState(false);
 
     const submitInput = async (dataInput) => {
         const { nome } = dataInput;
 
-        const paciente = await PacienteService.ShowByNome(nome);
-
-        if (!paciente) {
-            alert('Usuário não cadastrado');
+        if (!nome) {
+            // Se o campo de nome estiver vazio, redefine os estados
             setPacienteSelect(null);
-            reset();
-        } else {
-            setPacienteSelect(paciente);
-            //reset();
+            setBuscaRealizada(false);
+            return;
         }
+
+        const pacientes = await PacienteService.ShowByNome(nome);
+
+        const pacientesFiltrados = pacientes.filter(item =>
+            item.nomeCompleto.toLowerCase().includes(nome.toLowerCase())
+        );
+
+        setPacienteSelect(pacientesFiltrados);
+        setBuscaRealizada(true);
+
+        if (pacientesFiltrados.length === 0) {
+            // Se nenhum paciente for encontrado, exiba um alerta ou faça algo apropriado
+            alert('Nenhum paciente encontrado');
+        }
+
+        reset();
     };
 
     return (
@@ -38,12 +51,20 @@ export const InputPageConsulta = () => {
                         placeholder='Digite o nome completo do paciente'
                         {...register('nome')}
                     />
-                    <button className='botao botao btn btn-primary' type='submit'><span className='material-symbols-outlined'>Buscar</span></button>
+                    <button className='botao botao btn btn-primary' type='submit'>
+                        <span className='material-symbols-outlined'>Buscar</span>
+                    </button>
                 </Styled.InputArea>
             </Styled.ContainerInput>
 
             <Styled.ContainerCards>
-                {pacienteSelect && <FormConsulta paciente={pacienteSelect} key={pacienteSelect.id} />}
+                {buscaRealizada && pacienteSelect && pacienteSelect.length > 0 ? (
+                    pacienteSelect.map(paciente => (
+                        <FormConsulta paciente={paciente} key={paciente.id} />
+                    ))
+                ) : (
+                    <p>{buscaRealizada ? 'Nenhum paciente encontrado' : ''}</p>
+                )}
             </Styled.ContainerCards>
         </>
     );

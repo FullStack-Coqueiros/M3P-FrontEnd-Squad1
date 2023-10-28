@@ -77,9 +77,8 @@ const ShowByNome = async (nome) => {
     const response = await fetch(`${API_URL}/${filter}`);
     const data = await response.json();
     
-    // Retorna apenas o primeiro paciente encontrado ou null se nenhum for encontrado
-    return data.length > 0 ? data[0] : null;
-}
+    return data;
+  }
 
 const Delete = (id) => {
     LocalStorageService.set('users', Get().filter( user => user.id !== id));
