@@ -9,22 +9,23 @@ export const InputPageConsulta = () => {
         register,
         handleSubmit,
         reset,
-        formState: { error },
+        formState: { errors },
     } = useForm();
 
     const [pacienteSelect, setPacienteSelect] = useState(null);
 
     const submitInput = async (dataInput) => {
-        const { nomeCompleto } = dataInput;
+        const { nome } = dataInput;
 
-        const paciente = await PacienteService.ShowByNome(nomeCompleto);
+        const paciente = await PacienteService.ShowByNome(nome);
 
         if (!paciente) {
             alert('Usuário não cadastrado');
             setPacienteSelect(null);
+            reset();
         } else {
             setPacienteSelect(paciente);
-            reset();
+            //reset();
         }
     };
 
@@ -35,14 +36,14 @@ export const InputPageConsulta = () => {
                 <Styled.InputArea onSubmit={handleSubmit(submitInput)}>
                     <input
                         placeholder='Digite o nome completo do paciente'
-                        {...register('nomeCompleto')}
+                        {...register('nome')}
                     />
                     <button className='botao botao btn btn-primary' type='submit'><span className='material-symbols-outlined'>Buscar</span></button>
                 </Styled.InputArea>
             </Styled.ContainerInput>
 
             <Styled.ContainerCards>
-             {pacienteSelect && pacienteSelect.map(paciente => <FormConsulta paciente={paciente} key={paciente.id}/>)}
+                {pacienteSelect && <FormConsulta paciente={pacienteSelect} key={pacienteSelect.id} />}
             </Styled.ContainerCards>
         </>
     );

@@ -73,11 +73,12 @@ const ShowByEmail = async (email) => {
 }
 
 const ShowByNome = async (nome) => {
-  const filter = `?nome=${nome}`;
-  const response = await fetch(`${API_URL}/${filter}`);
-  const data = await response.json();
-  
-  return data;
+    const filter = `?nome=${nome}`;
+    const response = await fetch(`${API_URL}/${filter}`);
+    const data = await response.json();
+    
+    // Retorna apenas o primeiro paciente encontrado ou null se nenhum for encontrado
+    return data.length > 0 ? data[0] : null;
 }
 
 const Delete = (id) => {

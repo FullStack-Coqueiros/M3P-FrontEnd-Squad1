@@ -6,7 +6,7 @@ import PaginaSemPermissao from '../pages/semPermissao/PaginaSemPermissao.jsx';
 import CadastroUsuarioPage from "../pages/cadastros/usuarios/CadastroUsuariosPage.jsx";
 import PrivateRoute from "./privateRoute/PrivateRoute.jsx";
 import { CadastroPacientePage } from "../pages/cadastros/pacientes/CadastroPacientePage.jsx";
-import { CadastroConsultaPage } from "../pages/cadastros/consultas/CadastroConsultaPage.jsx";
+import CadastroConsultaPage from "../pages/cadastros/consultas/CadastroConsultaPage.jsx";
 
 
 export const AppRoutes = () => {
