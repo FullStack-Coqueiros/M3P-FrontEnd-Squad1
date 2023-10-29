@@ -34,11 +34,11 @@ const SidebarAberto = () => {
             <Styled.MenuSetor>Cadastros</Styled.MenuSetor>
             <MenuItem Icon={ImClipboard} Text="CADASTRAR USUÁRIO" To='/cadastro-usuario' />
             <MenuItem Icon={ImClipboard} Text="CADASTRAR PACIENTE" To='/cadastro-paciente' />
-            <MenuItem Icon={ImPlus} Text="CADASTRAR CONSULTA" To='/cadastrar-consulta' />
-            <MenuItem Icon={ImClipboard} Text="CADASTRAR EXAME" To='/cadastrar-exame' />
-            <MenuItem Icon={ImClipboard} Text="CADASTRAR MEDICAMENTO" To='/cadastrar-medicamento' />
-            <MenuItem Icon={ImClipboard} Text="CADASTRAR DIETA" To='/cadastrar-dieta' />
-            <MenuItem Icon={ImClipboard} Text="CADASTRAR EXERCÍCIO" To='/cadastrar-exercicio' />
+            <MenuItem Icon={ImPlus} Text="CADASTRAR CONSULTA" To='/cadastro-consulta' />
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR EXAME" To='/cadastro-exame' />
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR MEDICAMENTO" To='/cadastro-medicamento' />
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR DIETA" To='/cadastro-dieta' />
+            <MenuItem Icon={ImClipboard} Text="CADASTRAR EXERCÍCIO" To='/cadastro-exercicio' />
         </Styled.MenuArea>
 
 
