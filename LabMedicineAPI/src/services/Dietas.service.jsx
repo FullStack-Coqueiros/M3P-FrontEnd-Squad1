@@ -3,58 +3,101 @@ import { LocalStorageService } from "./LocalStorage.Server";
 const API_URL = 'http://localhost:7289/api/dietas';
 
 const Get = async () => {
-    const response = await fetch(API_URL);
-    const data = await response.json();
-
-    return data;
+    const response = await fetch(API_URL, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    });
+    if (response.ok) {
+        const data = await response.json()
+        return data;
+    }
+    return [];
 }
 
-const Create = async (dietaData) => {
-    await fetch(API_URL, {
+const CreateDieta = async (dietaData) => {
+   const response = await fetch(API_URL, {
         method: "POST",
         body: JSON.stringify(dietaData),
         headers: {
             "Content-type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token"),
         },
-    })
-    .then(async (data) => {
-        const res = await data.json();
-        console.log(res);
-        console.log("Dieta cadastrada com sucesso");
-    })
-    .catch((err) => {
-        console.log(err);
     });
-}
+    if(response.ok){
+        const dietaData = await response.json();
+        return dietaData;
+    }
+    throw new Error('Não foi possivel criar a dieta');
+};
+  
 
 const Show = async (id) => {
-    const response = await fetch(`${API_URL}/${id}`);
-    const data = await response.json();
+    const response = await fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    });
 
-    return data;
-}
-
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    }
+    return null;
+};
 const ShowByName = async (nome) => {
-    const filter = `?nome=${nome}`;
-    const response = await fetch(`${API_URL}/${filter}`);
-    const data = await response.json();
-
-    return data[0];
+    const filter = `${API_URL}?name=${encodeURIComponent(nome)}`;
+    const response = await fetch(filter, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    });
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    }
+    return null
+};
+const Delete =  async (id) => {
+    const url = `${API_URL}/${id}`;
+    const response = await fetch(url , {
+        method: 'DELETE',
+        headers:{
+            "Content-Type":"application/json",
+            "Authorization" : "Bearer "+localStorage.getItem('token')
+        }
+    });
+    if(response.status ===202){
+        return true;
+    }
+    return false;
 }
 
-const Delete = (id) => {
-    LocalStorageService.set('dietas', Get().filter((dieta) => dieta.id !== id));
-}
-
-const Update = (id, newDieta) => {
-    const dietas = Get();
-    dietas[dietas.findIndex((dieta) => dieta.id === id)] = newDieta;
-    LocalStorageService.set('dietas', dietas);
-}
+const Update = async (id, updatedData) => {
+    const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + localStorage.getItem("token")
+        },
+        body: JSON.stringify(updatedData)
+      });
+    if(response.ok){
+        const updatedDieta = await response.json();
+        return updatedDieta;
+    }
+    return null;
+};
 
 export const DietaService = {
     Get,
-    Create,
+    CreateDieta,
     Show,
     ShowByName,
     Delete,
