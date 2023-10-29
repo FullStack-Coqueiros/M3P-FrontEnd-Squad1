@@ -32,25 +32,6 @@ const GetCEPData = async (cep) => {
     }
 };
 
-const Create = async (data) => {
-    const response = await fetch(API_URL, {
-        method: 'POST',
-        body: JSON.stringify({ ...data }),
-        headers: {
-            'Accept': 'aplication/json',
-            'Content-Type': 'aplication/json',
-            "Authorization": "Bearer " + localStorage.getItem("token"),
-        },
-        //body: JSON.stringify(data),
-    });
-    if (response.ok) {
-        const data = await response.json();
-        return data;
-    }
-    return []
-    //console.log(res && `Usuario ${data.email} criado com sucesso`);
-}
-
 const CreatePaciente = async (pacienteData) => {
     await fetch(API_URL, {
         method: "POST",
@@ -80,14 +61,14 @@ const CreatePaciente = async (pacienteData) => {
 
 const Show = async (id) => {
 
-    const response = await fetch(`${API_URL}/${id}`,{
-        method:'GET',
-        headers:{
-            "Content-type":"application/json",
-            "Authorization" : "Bearer "+localStorage.getItem('token'),
+    const response = await fetch(`${API_URL}/${id}`, {
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem('token'),
         }
     });
-    if(response.ok){
+    if (response.ok) {
         const data = await response.json()
         return data
     }
@@ -97,14 +78,14 @@ const Show = async (id) => {
 
 const ShowByEmail = async (email) => {
     const url = `${API_URL}?email=${encodeURIComponent(email)}`;
-    const response = await fetch(`${API_URL}/${url}`,{
-        method:'GET',
-        headers:{
-            "Content-type":"application/json",
-            "Authorization" : "Bearer "+localStorage.getItem('token'),
+    const response = await fetch(`${API_URL}/${url}`, {
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem('token'),
         }
     });
-    if(response.ok){
+    if (response.ok) {
         const data = await response.json()
         return data
     }
@@ -114,14 +95,14 @@ const ShowByEmail = async (email) => {
 
 const ShowByNome = async (nome) => {
     const filter = `${API_URL}?email=${encodeURIComponent(nome)}`;
-    const response = await fetch(`${API_URL}/${filter}`,{
-        method:'GET',
-        headers:{
-            "Content-type":"application/json",
-            "Authorization" : "Bearer "+localStorage.getItem('token'),
+    const response = await fetch(`${API_URL}/${filter}`, {
+        method: 'GET',
+        headers: {
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem('token'),
         }
     });
-    if(response.ok){
+    if (response.ok) {
         const data = await response.json()
         return data
     }
@@ -130,30 +111,41 @@ const ShowByNome = async (nome) => {
 
 const Delete = async (id) => {
     const url = `${API_URL}/${id}`;
-    const response = await fetch(url,{
+    const response = await fetch(url, {
         method: 'DELETE',
-        headers:{
+        headers: {
             "Content-Type": "application/json",
-            "Authorization" : "Bearer "+ localStorage.getItem('token')
+            "Authorization": "Bearer " + localStorage.getItem('token')
         }
     });
-    if(response.status === 202){
+    if (response.status === 202) {
         return true;
     }
     throw new Error(`Erro ao excluir paciente: ${response.statusText}`);
 }
-    
 
-const Update = (id, newUser) => {
-    const users = Get();
-    users[users.find(user => user.ide === id).indexOf] = newUser;
-    LocalStorageService.set('users', users)
-}
+const Update = async (id, newUser) => {
+    const url = `${API_URL}/${id}`;
+    const response = await fetch(url, {
+        method: 'PUT',
+        body: JSON.stringify({ ...newUser }),
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem('token')
+        },
+        body: JSON.stringify(newUser)
+    });
+    if (response.status === 200) {
+        return true;
+    }
+    throw new Error(`Erro a atualizar o usuario: ${response.statusText}`);
+};
+
+
 
 export const PacienteService = {
     Get,
     GetCEPData,
-    Create,
     CreatePaciente,
     Show,
     ShowByEmail,

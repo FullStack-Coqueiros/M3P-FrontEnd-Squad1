@@ -3,89 +3,134 @@ import { LocalStorageService } from "./LocalStorage.Server";
 const API_URL = "http://localhost:7289/api/usuarios";
 
 const Get = async () => {
-  const response = await fetch(API_URL);
-  const data = await response.json();
+  const response = await fetch(API_URL, {
+    method: "GET",
+    headers: {
+      'Content-Type': 'application/json',
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    },
+  });
+  if (response.ok) {
+    return await response.json();
+  }
+  return [];
+}
 
-  return data;
-};
-
-const Create = async (data) => {
+const CreateUser = async (data) => {
   const response = await fetch(API_URL, {
     method: "POST",
     headers: {
-      Accept: "aplication/json",
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token")
     },
-    body: JSON.stringify(data),
   });
-  const res = await response.json();
-  console.log(res && `Usuário ${data.email} criado com sucesso`);
-};
-
-const CreateUser = async (UserData) => {
-  await fetch(API_URL, {
-    method: "POST",
-    body: JSON.stringify(UserData),
-    headers: {
-      "Content-type": "application/json",
-    },
-  })
-    .then(async (data) => {
-      const res = await data.json();
-      console.log(res);
-      console.log("Cadastrado com Sucesso!");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  if (response.ok) {
+    const usuario = await response.json();
+    return usuario;
+  } else {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 };
 
 const Show = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`);
-  const data = await response.json();
-
-  return data;
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token"),
+    }
+  });
+  if (response.ok) {
+    return await response.json();
+  } else {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 };
+
 
 const ShowByEmail = async (email) => {
   const filter = `?email=${email}`;
-  const response = await fetch(`${API_URL}/${filter}`);
-  const data = await response.json();
-
-  return data[0];
+  const response = await fetch(`${API_URL}/${filter}`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token"),
+    }
+  });
+  if (response.ok) {
+    return await response.json();
+  }
+  throw new Error(`HTTP error! status: ${response.status}`)
 };
 
 
 const ShowByNome = async (nome) => {
   const filter = `?nome=${nome}`;
-  const response = await fetch(`${API_URL}/${filter}`);
-  const data = await response.json();
-  
-  return data;
-}
-
-const Delete = (id) => {
-  LocalStorageService.set(
-    "users",
-    Get().filter((user) => user.id !== id)
-  );
+  const response = await fetch(`${API_URL}/${filter}`, {
+    method: "GET",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token"),
+    }
+  });
+  if (response.ok) {
+    return await response.json();
+  }
+  else {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 };
 
-const DeleteUser = (id) => {
-  LocalStorageService.set(
-    "users",
-    Get().filter((user) => user.id !== id)
-  );
+
+const Delete = async (id) => {
+  if (id === loggedUserId) {
+    throw new Error("Você não pode excluir a si mesmo.");
+  }
+  const url = `${API_URL}/${id}`;
+  const response = await fetch(url, {
+    method: "DELETE",
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    }
+  });
+  if (response === 202) {
+    return true;
+  }
+  else {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 };
 
-const Update = (id, newUser) => {
-  const users = Get();
-  users[users.find((user) => user.id === id).indexOf] = newUser;
-  LocalStorageService.set("users", users);
+
+const Update = async (id, newUser) => {
+  const url = `${API_URL}/${id}`;
+  const response = await fetch(url, {
+    method: "PUT",
+    body: JSON.stringify({ ...newUser }),
+    headers: {
+      "Accept": "application/json",
+      "Content-Type": "application/json",
+      "Authorization": "Bearer " + localStorage.getItem("token")
+    },
+    body: JSON.stringify(newUser)
+  });
+  if (response.ok) {
+    return await response.json();
+  }
+  else {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 };
+
 
 export const UserService = {
   Get,
-  Create,
   CreateUser,
   Show,
   ShowByEmail,

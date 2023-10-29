@@ -17,7 +17,7 @@ const Get = async () => {
     return [];
 }
 
-const Create = async (medicamentoData) => {
+const CreateMedicamento = async (medicamentoData) => {
     const response = await fetch(API_URL, {
         method: "POST",
         body: JSON.stringify(medicamentoData),
@@ -27,20 +27,11 @@ const Create = async (medicamentoData) => {
         },
     });
     if (response.ok) {
-        //.then(async (data) => {
         const data = await data.json();
         return data;
     }
     return []
 }
-
-/// console.log(res);
-//console.log("Medicamento cadastrado com sucesso");
-//})
-// .catch((err) => {
-//   console.log(err);
-// });
-
 
 const Show = async (id) => {
     const response = await fetch(url, {
@@ -58,15 +49,12 @@ const Show = async (id) => {
     return null;
 };
 
-// const response = await fetch(`${API_URL}/${id}`);
-// const data = await response.json();
 
-// return data;
 
 
 const ShowByName = async (nome) => {
     const filter = `${API_URL}?name=${encodeURIComponent(nome)}`;
-    //const filter = `?nome=${nome}`;
+ 
     const response = await fetch(filter, {
         method: "GET",
         headers: {
@@ -97,12 +85,12 @@ const Delete =  async (id) => {
 
 const Update = async (id, updatedData) => {
     const response = await fetch(url, {
-        method: "PUT", // Use PUT para atualizar recursos
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + localStorage.getItem("token")
         },
-        body: JSON.stringify(updatedData) // Os novos dados a serem enviados
+        body: JSON.stringify(updatedData) 
       });
     if(response.ok){
         const updatedMedicamento = await response.json();
@@ -110,14 +98,10 @@ const Update = async (id, updatedData) => {
     }
     return null;
 };
-    // const medicamentos = Get();
-    // medicamentos[medicamentos.findIndex((medicamento) => medicamento.id === id)] = newMedicamento;
-    // LocalStorageService.set('medicamentos', medicamentos);
-
-
+   
 export const MedicamentoService = {
     Get,
-    Create,
+    CreateMedicamento,
     Show,
     ShowByName,
     Delete,
