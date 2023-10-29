@@ -1,16 +1,24 @@
 import { LocalStorageService } from "./LocalStorage.Server";
 
-const API_URL = 'http://localhost:3000/pacientes'
+const API_URL = 'http://localhost:7289/api/pacientes'
 
 const Get = async () => {
-   /*  return localStorage.getItem('users')  ? JSON.parse(localStorage.getItem('users')) : null */
-    const response = await fetch(API_URL);
-    const data = await response.json();
+    /*  return localStorage.getItem('users')  ? JSON.parse(localStorage.getItem('users')) : null */
+    const response = await fetch(API_URL, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    });
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    }
+    return [];
+}
 
-    return data;
-   }
-
-   const GetCEPData = async (cep) => {
+const GetCEPData = async (cep) => {
     try {
         const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
         if (!response.ok) {
@@ -24,75 +32,117 @@ const Get = async () => {
     }
 };
 
-const Create = async(data) => {
-      const response = await fetch(API_URL, {
+const Create = async (data) => {
+    const response = await fetch(API_URL, {
         method: 'POST',
+        body: JSON.stringify({ ...data }),
         headers: {
             'Accept': 'aplication/json',
             'Content-Type': 'aplication/json',
+            "Authorization": "Bearer " + localStorage.getItem("token"),
         },
-        body: JSON.stringify(data),
+        //body: JSON.stringify(data),
     });
-    const res = await response.json();
-    console.log(res && `Usuario ${data.email} criado com sucesso`);
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    }
+    return []
+    //console.log(res && `Usuario ${data.email} criado com sucesso`);
 }
 
-const CreatePaciente = async(pacienteData) => {
+const CreatePaciente = async (pacienteData) => {
     await fetch(API_URL, {
         method: "POST",
         body: JSON.stringify(pacienteData),
         headers: {
-          "Content-type": "application/json",
+            "Content-type": "application/json",
+            "Authorization": "Bearer " + localStorage.getItem('token')
         },
-      })
-        .then(async (data) => {
-         const res = await data.json();
-          console.log(res);
-          console.log("Paciente cadastrado com sucesso.");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  
+    });
+    if (response.ok) {
+        const data = await response.json();
+        return data;
+    }
+    return []
 }
+
+// .then(async (data) => {
+//  const res = await data.json();
+//   console.log(res);
+//   console.log("Paciente cadastrado com sucesso.");
+// })
+// .catch((err) => {
+//   console.log(err);
+// });
+
+
 
 const Show = async (id) => {
 
-const response = await fetch(`${API_URL}/${id}`);
-const data = await response.json();
- 
-return data;
+    const response = await fetch(`${API_URL}/${id}`,{
+        method:'GET',
+        headers:{
+            "Content-type":"application/json",
+            "Authorization" : "Bearer "+localStorage.getItem('token'),
+        }
+    });
+    if(response.ok){
+        const data = await response.json()
+        return data
+    }
+    return [];
 }
+
 
 const ShowByEmail = async (email) => {
-    const filter = `?email=${email}`;
-    const response = await fetch(`${API_URL}/${filter}`);
-    const data = await response.json();
-    
-    return data[0];
-}
+    const url = `${API_URL}?email=${encodeURIComponent(email)}`;
+    const response = await fetch(`${API_URL}/${url}`,{
+        method:'GET',
+        headers:{
+            "Content-type":"application/json",
+            "Authorization" : "Bearer "+localStorage.getItem('token'),
+        }
+    });
+    if(response.ok){
+        const data = await response.json()
+        return data
+    }
+    return [];
+};
+
 
 const ShowByNome = async (nome) => {
-  const filter = `?nome=${nome}`;
-  const response = await fetch(`${API_URL}/${filter}`);
-  const data = await response.json();
-  
-  return data;
+    const filter = `${API_URL}?email=${encodeURIComponent(nome)}`;
+    const response = await fetch(`${API_URL}/${filter}`,{
+        method:'GET',
+        headers:{
+            "Content-type":"application/json",
+            "Authorization" : "Bearer "+localStorage.getItem('token'),
+        }
+    });
+    if(response.ok){
+        const data = await response.json()
+        return data
+    }
+    return [];
 }
 
-const Delete = (id) => {
-    LocalStorageService.set('users', Get().filter( user => user.id !== id));
+const Delete = async (id) => {
+    const url = `${API_URL}/${id}`;
+    const response = await fetch(url,{
+        method: 'DELETE',
+        headers:{
+            "Content-Type": "application/json",
+            "Authorization" : "Bearer "+ localStorage.getItem('token')
+        }
+    });
+    if(response.status === 202){
+        return true;
+    }
+    throw new Error(`Erro ao excluir paciente: ${response.statusText}`);
 }
-
-const DeletePaciente = async (id) => {
-  const response = await fetch(`${API_URL}/${id}`, {
-      method: 'DELETE',
-  });
-
-  if (!response.ok) {
-      throw new Error(`Erro ao excluir paciente: ${response.statusText}`);
-  }
-}
+    
 
 const Update = (id, newUser) => {
     const users = Get();
@@ -109,6 +159,5 @@ export const PacienteService = {
     ShowByEmail,
     ShowByNome,
     Delete,
-    DeletePaciente,
     Update
 }

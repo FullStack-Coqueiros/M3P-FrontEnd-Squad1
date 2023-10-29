@@ -2,8 +2,8 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import React, { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext.jsx";
-import { UserService } from "../../services/User.Service.jsx";
 import { InputComponent } from "../LoginComponents/InputComponent.jsx";
+import AuthService from "../../services/Auth.Service.jsx";
 
 export const LoginComponent = () => {
   const {
@@ -18,15 +18,10 @@ export const LoginComponent = () => {
 
   const submitForm = async (data) => {
     const { email, password } = data;
-    const user = await UserService.ShowByEmail(email);
-    if (!user) {
-      alert("Usuário não encontrado");
-      reset();
-      return;
-    }
-    password === user.password
-      ? redirectToHome(user)
-      : alert("Usuário com senha inválida");
+
+    const usuario = AuthService.login(email, password);
+
+    usuario ? redirectToHome(usuario): alert("Erro de email e ou senha");
   };
   const redirectToHome = (user) => {
     setAuth({
@@ -35,6 +30,7 @@ export const LoginComponent = () => {
     });
     navigate("/");
   };
+
 
   return (
     <form onSubmit={handleSubmit(submitForm)}>

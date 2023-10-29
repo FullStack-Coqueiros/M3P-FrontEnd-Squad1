@@ -7,11 +7,11 @@ const AuthService = {
     console.log('User:', user);
     return user && user.tipo === "administrador";
   },
-  login: async (username, password, setAuth) => {
+  login: async (username, password) => {
     //const { setAuth } = useAuth();
 
     try {
-      const response = await fetch("/api/login", {
+      const response = await fetch("http://localhost:7289/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -25,14 +25,13 @@ const AuthService = {
       }
 
       const data = await response.json();
-      const { user } = data;
+      const { user, token } = data;
 
-      setAuth({ user, isLogged: true });
+     localStorage.setItem("token",token);
+     return user;
 
-      return true;
     } catch (error) {
       console.error("Erro ao fazer login:", error);
-      return false;
     }
   },
   logout: (setAuth) => {
