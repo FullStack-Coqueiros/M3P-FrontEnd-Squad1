@@ -1,6 +1,6 @@
 import { LocalStorageService } from "./LocalStorage.Server";
 
-const API_URL = 'http://localhost:7289/api/pacientes'
+const API_URL = 'https://localhost:7289/api/pacientes'
 
 const Get = async () => {
     /*  return localStorage.getItem('users')  ? JSON.parse(localStorage.getItem('users')) : null */
@@ -47,16 +47,6 @@ const CreatePaciente = async (pacienteData) => {
     }
     return []
 }
-
-// .then(async (data) => {
-//  const res = await data.json();
-//   console.log(res);
-//   console.log("Paciente cadastrado com sucesso.");
-// })
-// .catch((err) => {
-//   console.log(err);
-// });
-
 
 
 const Show = async (id) => {

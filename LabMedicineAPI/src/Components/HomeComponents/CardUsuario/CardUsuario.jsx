@@ -2,7 +2,7 @@ import * as Styled from './CardUsuario.style.jsx';
 import { ImUser } from 'react-icons/im';
 
 const CardUsuario = ({ usuario }) => {
-console.log(usuario)
+console.log(usuario.nomeCompleto)
   return (
     <>
       <Styled.CardUsuarioContainer>

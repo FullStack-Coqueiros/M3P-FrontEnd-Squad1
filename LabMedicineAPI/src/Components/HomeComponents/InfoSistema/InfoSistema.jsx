@@ -3,6 +3,12 @@ import * as Styled from './InfoSistema.Style.jsx';
 import React, { useState, useEffect } from 'react';
 import { ImUsers, ImAidKit, ImFolderPlus } from 'react-icons/im';
 import { GiRemedy, GiFoodTruck, GiHeartInside  } from "react-icons/gi";
+import { PacienteService } from '../../../services/Paciente.service.jsx';
+import { ConsultaService } from '../../../services/Consulta.service.jsx';
+import { ExameService } from '../../../services/Exame.service.jsx';
+import { MedicamentoService } from '../../../services/Medicamentos.service.jsx';
+import { DietaService } from '../../../services/Dietas.service.jsx';
+import { ExercicioService } from '../../../services/Exercicios.service.jsx';
 
 function EstatisticasSistema() {
     const [pacientes, setPacientes] = useState([]);
@@ -25,32 +31,32 @@ function EstatisticasSistema() {
 
     useEffect(() => {
         const getPacientes = async () => {
-            const pacientesDoDB = await fetchData('pacientes');
+            const pacientesDoDB = PacienteService.Get();
             setPacientes(pacientesDoDB);
         };
 
         const getConsultas = async () => {
-            const consultasDoDB = await fetchData('consultas');
+            const consultasDoDB = ConsultaService.Get();
             setConsultas(consultasDoDB);
           };
       
           const getExames = async () => {
-            const examesDoDB = await fetchData('exames');
+            const examesDoDB = ExameService.Get();
             setExames(examesDoDB);
           }; 
 
           const getMedicamentos = async () => {
-            const medicamentosDoDB = await fetchData('medicamentos');
+            const medicamentosDoDB = MedicamentoService.Get;
             setMedicamentos(medicamentosDoDB);
           };
 
           const getDietas = async () => {
-            const dietasDoDB = await fetchData('dietas');
+            const dietasDoDB = DietaService.Get();
             setDietas(dietasDoDB);
           };
 
           const getExercicios = async () => {
-            const exerciciosDoDB = await fetchData('exercicios');
+            const exerciciosDoDB = ExercicioService.Get();
             setExercicios(exerciciosDoDB);
           }
           

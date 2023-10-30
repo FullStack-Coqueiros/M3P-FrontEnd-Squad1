@@ -1,6 +1,6 @@
 import { LocalStorageService } from "./LocalStorage.Server";
 
-const API_URL = 'http://localhost:7289/api/exames'
+const API_URL = 'https://localhost:7289/api/exames'
 
 
 

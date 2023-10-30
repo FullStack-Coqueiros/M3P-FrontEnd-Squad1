@@ -11,7 +11,7 @@ const AuthService = {
     //const { setAuth } = useAuth();
 
     try {
-      const response = await fetch("http://localhost:7289/api/login", {
+      const response = await fetch("https://localhost:7289/api/usuarios/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,7 +42,8 @@ const AuthService = {
 };
 
 const getUser = () => {
-  return JSON.parse(localStorage.getItem("user")) || {};
+  const storedData = JSON.parse(localStorage.getItem("user"));
+  return storedData && storedData.user ? storedData.user : {};;
 };
 
 export default AuthService;
