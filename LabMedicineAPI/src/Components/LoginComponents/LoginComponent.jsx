@@ -17,12 +17,20 @@ export const LoginComponent = () => {
   const { setAuth } = useContext(AuthContext);
 
   const submitForm = async (data) => {
-    const { email, password } = data;
-
-    const usuario = AuthService.login(email, password);
-
-    usuario ? redirectToHome(usuario): alert("Erro de email e ou senha");
+  
+    try {
+      const usuario = await AuthService.login(data.email, data.password);
+  
+      if (usuario) {
+        redirectToHome(usuario);
+      } else {
+        alert("Erro de email e/ou senha");
+      }
+    } catch (error) {
+      console.error("Erro ao autenticar:", error);
+    }
   };
+  
   const redirectToHome = (user) => {
     setAuth({
       user,
@@ -30,6 +38,7 @@ export const LoginComponent = () => {
     });
     navigate("/");
   };
+  
 
 
   return (
@@ -72,7 +81,7 @@ export const LoginComponent = () => {
       </div>
 
       <button
-        className={!errors.email && !errors.password ? "active" : ""}
+        className={!errors.email && !errors.password ? "active" : "inactive"}
         type="submit"
         disabled={errors.email || errors.password}
       >
